@@ -5,6 +5,8 @@ use App\Http\Controllers\TourController;
 use App\Http\Controllers\GuiumController;
 use App\Http\Controllers\PaqueteController;
 use App\Http\Controllers\TransporteController;
+use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\DepositoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +20,7 @@ Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store
 Route::get('/usuarios/editar/{id}', [UsuarioController::class, 'editarUsuario'])->name('usuarios.editar');
 Route::put('/usuarios/{id}', [UsuarioController::class, 'actualizarUsuario'])->name('usuarios.actualizar');
 Route::delete('/usuarios/{id}', [UsuarioController::class, 'eliminarUsuario'])->name('usuarios.eliminar');
+
 
 use App\Http\Controllers\AuthController;
 
@@ -48,3 +51,10 @@ Route::resource('destinos', DestinoController::class);
 Route::resource('guia', GuiumController::class);
 Route::resource('paquetes', PaqueteController::class);
 Route::resource('transportes', TransporteController::class);
+Route::resource('clientes', ClienteController::class);
+Route::resource('depositos', DepositoController::class);
+
+// routes/web.php
+Route::get('/admin', function () {
+    return view('admin_panel');
+});
