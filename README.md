@@ -30,4 +30,5 @@ MySQL Workbench es una herramienta visual de diseño y administración de bases 
 
 ## DIAGRAMA FISICO DE LA BD
 
-![Diagrama del Sistema](ModeloLogico2.png)
+![ModeloLogico2](https://github.com/user-attachments/assets/f2c3f021-93fa-4a46-866c-69010bac2cf4)
+
