@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('usuario', function (Blueprint $table) {
-            $table->integer('id_usuario')->primary();
-            $table->string('nombre', 45);
-            $table->string('correo', 100)->nullable();
-            $table->string('contraseña');
-            $table->boolean('activo');
-            $table->integer('rol_id_rol')->index('fk_usuario_rol_idx');
-        });
+        if (!Schema::hasTable('tour')) {
+            Schema::create('usuario', function (Blueprint $table) {
+                $table->integer('id_usuario')->primary();
+                $table->string('nombre', 45);
+                $table->string('correo', 100)->nullable();
+                $table->string('contraseña');
+                $table->boolean('activo');
+                $table->integer('rol_id_rol')->index('fk_usuario_rol_idx');
+            });
+        }
     }
 
     /**

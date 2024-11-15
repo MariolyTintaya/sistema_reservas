@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('ruta', function (Blueprint $table) {
-            $table->integer('id_ruta', true);
-            $table->integer('distancia')->nullable();
-            $table->string('estadoRuta', 45);
-            $table->boolean('activo');
-            $table->integer('destino_id_destino')->index('fk_ruta_destino_idx');
-        });
+        if (!Schema::hasTable('ruta')) {
+            Schema::create('ruta', function (Blueprint $table) {
+                $table->integer('id_ruta', true);
+                $table->integer('distancia')->nullable();
+                $table->string('estadoRuta', 45);
+                $table->boolean('activo');
+                $table->integer('destino_id_destino')->index('fk_ruta_destino_idx');
+            });
+        }
     }
 
     /**

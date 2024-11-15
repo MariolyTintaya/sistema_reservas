@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('cliente', function (Blueprint $table) {
-            $table->foreign(['tipo_cliente_id_tipo'], 'fk_cliente_tipo_cliente')->references(['id_tipo'])->on('tipo_cliente')->onUpdate('no action')->onDelete('no action');
-        });
+        if (!Schema::hasTable('cliente')) {
+            Schema::table('cliente', function (Blueprint $table) {
+                $table->foreign(['tipo_cliente_id_tipo'], 'fk_cliente_tipo_cliente')->references(['id_tipo'])->on('tipo_cliente')->onUpdate('no action')->onDelete('no action');
+            });
+        }
     }
 
     /**
