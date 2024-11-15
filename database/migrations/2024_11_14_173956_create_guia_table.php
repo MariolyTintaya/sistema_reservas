@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guia', function (Blueprint $table) {
-            $table->integer('id_guia', true);
-            $table->string('nombre', 45);
-            $table->integer('celular');
-            $table->string('disponibilidad', 45);
-            $table->boolean('activo');
-            $table->integer('tour_id_tour')->index('fk_guia_tour1_idx');
-        });
+        if (!Schema::hasTable('guia')) {
+            Schema::create('guia', function (Blueprint $table) {
+                $table->integer('id_guia', true);
+                $table->string('nombre', 45);
+                $table->integer('celular');
+                $table->string('disponibilidad', 45);
+                $table->boolean('activo');
+                $table->integer('tour_id_tour')->index('fk_guia_tour1_idx');
+            });
+        }
     }
 
     /**

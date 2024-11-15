@@ -11,12 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transporte', function (Blueprint $table) {
-            $table->string('num_placa', 25)->primary();
-            $table->integer('num_asientos');
-            $table->string('tipo_transporte', 45);
-            $table->boolean('activo');
-        });
+        if (!Schema::hasTable('transporte')) {
+            Schema::create('transporte', function (Blueprint $table) {
+                $table->string('num_placa', 25)->primary();
+                $table->integer('num_asientos');
+                $table->string('tipo_transporte', 45);
+                $table->boolean('activo');
+            });
+        }
     }
 
     /**

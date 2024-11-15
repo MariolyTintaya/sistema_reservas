@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('deposito', function (Blueprint $table) {
-            $table->foreign(['cliente_id_cliente'], 'fk_deposito_cliente1')->references(['id_cliente'])->on('cliente')->onUpdate('no action')->onDelete('no action');
-            $table->foreign(['pago_id_pago'], 'fk_deposito_pago')->references(['id_pago'])->on('pago')->onUpdate('no action')->onDelete('no action');
-        });
+        if (!Schema::hasTable('deposito')) {
+            Schema::table('deposito', function (Blueprint $table) {
+                $table->foreign(['cliente_id_cliente'], 'fk_deposito_cliente1')->references(['id_cliente'])->on('cliente')->onUpdate('no action')->onDelete('no action');
+                $table->foreign(['pago_id_pago'], 'fk_deposito_pago')->references(['id_pago'])->on('pago')->onUpdate('no action')->onDelete('no action');
+            });
+        }
     }
 
     /**
