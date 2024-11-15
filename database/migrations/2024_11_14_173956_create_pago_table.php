@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pago', function (Blueprint $table) {
-            $table->integer('id_pago', true);
-            $table->string('tipo_pago', 45);
-        });
+        if (!Schema::hasTable('pago')) {
+            Schema::create('pago', function (Blueprint $table) {
+                $table->integer('id_pago', true);
+                $table->string('tipo_pago', 45);
+            });
+        }
     }
 
     /**

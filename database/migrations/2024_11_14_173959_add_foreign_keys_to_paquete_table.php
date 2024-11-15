@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('paquete', function (Blueprint $table) {
-            $table->foreign(['tour_id_tour'], 'fk_paquete_tour')->references(['id_tour'])->on('tour')->onUpdate('no action')->onDelete('no action');
-        });
+        if (!Schema::hasTable('paquete')) {
+            Schema::table('paquete', function (Blueprint $table) {
+                $table->foreign(['tour_id_tour'], 'fk_paquete_tour')->references(['id_tour'])->on('tour')->onUpdate('no action')->onDelete('no action');
+            });
+        }
     }
 
     /**

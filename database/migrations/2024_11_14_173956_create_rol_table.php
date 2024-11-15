@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rol', function (Blueprint $table) {
-            $table->integer('id_rol', true);
-            $table->string('nombre_rol', 45);
-        });
+        if (!Schema::hasTable('rol')) {
+            Schema::create('rol', function (Blueprint $table) {
+                $table->integer('id_rol', true);
+                $table->string('nombre_rol', 45);
+            });
+        }
     }
 
     /**

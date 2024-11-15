@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('usuario', function (Blueprint $table) {
-            $table->foreign(['rol_id_rol'], 'fk_usuario_rol')->references(['id_rol'])->on('rol')->onUpdate('no action')->onDelete('no action');
-        });
+        if (!Schema::hasTable('usuario')) {
+            Schema::table('usuario', function (Blueprint $table) {
+                $table->foreign(['rol_id_rol'], 'fk_usuario_rol')->references(['id_rol'])->on('rol')->onUpdate('no action')->onDelete('no action');
+            });
+        }
     }
 
     /**

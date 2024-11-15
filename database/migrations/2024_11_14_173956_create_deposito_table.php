@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('deposito', function (Blueprint $table) {
-            $table->integer('id_deposito', true);
-            $table->date('fecha');
-            $table->boolean('activo');
-            $table->integer('pago_id_pago')->index('fk_deposito_pago_idx');
-            $table->integer('cliente_id_cliente')->index('fk_deposito_cliente1_idx');
-        });
+        if (!Schema::hasTable('deposito')) {
+            Schema::create('deposito', function (Blueprint $table) {
+                $table->integer('id_deposito', true);
+                $table->date('fecha');
+                $table->boolean('activo');
+                $table->integer('pago_id_pago')->index('fk_deposito_pago_idx');
+                $table->integer('cliente_id_cliente')->index('fk_deposito_cliente1_idx');
+            });
+        }
     }
 
     /**

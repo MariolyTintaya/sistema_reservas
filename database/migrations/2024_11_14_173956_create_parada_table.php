@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('parada', function (Blueprint $table) {
-            $table->integer('id_parada', true);
-            $table->string('nombre', 45);
-            $table->string('descripcion', 1000);
-            $table->boolean('activo');
-            $table->integer('ruta_id_ruta')->index('fk_parada_ruta_idx');
-        });
+        if (!Schema::hasTable('parada')) {
+            Schema::create('parada', function (Blueprint $table) {
+                $table->integer('id_parada', true);
+                $table->string('nombre', 45);
+                $table->string('descripcion', 1000);
+                $table->boolean('activo');
+                $table->integer('ruta_id_ruta')->index('fk_parada_ruta_idx');
+            });
+        }
     }
 
     /**

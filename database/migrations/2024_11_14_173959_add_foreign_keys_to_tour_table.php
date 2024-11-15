@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('tour', function (Blueprint $table) {
-            $table->foreign(['transporte_num_placa'], 'fk_tour_transporte1')->references(['num_placa'])->on('transporte')->onUpdate('no action')->onDelete('no action');
-        });
+        if (!Schema::hasTable('tour')) {
+            Schema::table('tour', function (Blueprint $table) {
+                $table->foreign(['transporte_num_placa'], 'fk_tour_transporte1')->references(['num_placa'])->on('transporte')->onUpdate('no action')->onDelete('no action');
+            });
+        }
     }
 
     /**
