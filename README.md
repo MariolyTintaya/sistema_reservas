@@ -1,66 +1,33 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Proyecto_AMCA
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Este repositoria se usara para desarrollar el proyecto de AMCA
 
-## About Laravel
+## *INFORMACION DEL PROYECTO*
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+El proyecto está orientado a crear un sistema de reservas para la empresa **LONDON TRAVEL**, con el fin de ofrecer una solución que permita un control integral en la reserva de tours, la gestión de rutas y los pagos. Este sistema busca ser amigable para los administradores y ofrecer herramientas para gestionar la información y mantener el sistema al día. La propuesta busca mejorar la operatividad y reforzar el control administrativo en la empresa.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## NOMBRE DEL PROYECTO
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+*Sistema Web de Reserva de Tours para la empresa London Travel*
 
-## Learning Laravel
+## INTEGRANTES
+| ROL/ FUNCION | APELLIDOS | NOMBRES |
+| ------------ | ------------ | ------------ |
+|Coach      | Tintaya Ramos      | Marioly Belen      |
+| Programador Front End   | Encinas Gutierrez        | Ailyn Lenny     |
+| Programador Front End       | Montaño Laura        | Carlos Walter     |
+| Programador Back End       | Thompson Villalobos        | Alvaro Fabian     |
+## HERRAMIENTAS DE DESAROLLO
+Se utilizará **Laravel** como herramienta principal de desarrollo.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+*Laravel* es un framework de desarrollo web de código abierto basado en PHP, diseñado para facilitar la creación de aplicaciones web robustas y escalables. Es conocido por su sintaxis elegante y su enfoque en la simplicidad, lo que permite a los desarrolladores construir aplicaciones complejas de forma más eficiente.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+## GESTOR BD
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Como gestor utilizaremos MySQL Work Bench 
 
-## Laravel Sponsors
+MySQL Workbench es una herramienta visual de diseño y administración de bases de datos para MySQL. Proporciona un entorno integrado que permite a los desarrolladores y administradores de bases de datos gestionar sus sistemas de manera eficiente y eficaz.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+## DIAGRAMA FISICO DE LA BD
 
-### Premium Partners
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+![Diagrama del Sistema](ModeloLogico2.png)
