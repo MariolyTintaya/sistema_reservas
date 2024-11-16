@@ -8,6 +8,7 @@ use App\Http\Controllers\TransporteController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DepositoController;
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -42,7 +43,7 @@ use App\Http\Controllers\VendedorController;
 
 Route::resource('vendedores', VendedorController::class);
 
-
+//------------------------ RUTAS AILYN NO TOCAR :) --------------------------------
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -53,6 +54,8 @@ Route::resource('paquetes', PaqueteController::class);
 Route::resource('transportes', TransporteController::class);
 Route::resource('clientes', ClienteController::class);
 Route::resource('depositos', DepositoController::class);
+//--------------------------- FIN DE LAS RUTAS AILYN :) ----------------------------
+
 
 // routes/web.php
 Route::get('/admin', function () {
