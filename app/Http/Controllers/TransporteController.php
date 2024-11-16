@@ -49,7 +49,7 @@ class TransporteController extends Controller
      */
     public function show($num_placa): View|RedirectResponse
     {
-        $transporte = Transporte::find($num_placa);
+        $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
             return Redirect::route('transportes.index')->with('error', 'Transporte not found.');
@@ -63,7 +63,7 @@ class TransporteController extends Controller
      */
     public function edit($num_placa): View|RedirectResponse
     {
-        $transporte = Transporte::find($num_placa);
+        $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
             return Redirect::route('transportes.index')->with('error', 'Transporte not found.');
@@ -75,8 +75,14 @@ class TransporteController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TransporteRequest $request, Transporte $transporte): RedirectResponse
+    public function update(TransporteRequest $request, $num_placa): RedirectResponse
     {
+        $transporte = Transporte::find(urldecode($num_placa));
+
+        if (!$transporte) {
+            return Redirect::route('transportes.index')->with('error', 'Transporte not found.');
+        }
+
         $transporte->update($request->validated());
 
         return Redirect::route('transportes.index')
@@ -88,7 +94,7 @@ class TransporteController extends Controller
      */
     public function destroy($num_placa): RedirectResponse
     {
-        $transporte = Transporte::find($id);
+        $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
             return Redirect::route('transportes.index')->with('error', 'Transporte not found.');

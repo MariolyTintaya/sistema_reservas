@@ -14,13 +14,11 @@
                         <span class="card-title">{{ __('Update') }} Transporte</span>
                     </div>
                     <div class="card-body bg-white">
-                        <form method="POST" action="{{ route('transportes.update', $transporte->num_placa) }}"  role="form" enctype="multipart/form-data">
-                            {{ method_field('PATCH') }}
-                            @csrf
-
-                            @include('transporte.form')
-
-                        </form>
+                    <form method="POST" action="{{ route('transportes.update', urlencode($transporte->num_placa)) }}" role="form" enctype="multipart/form-data">
+                        {{ method_field('PATCH') }}
+                        @csrf
+                        @include('transporte.form')
+                    </form>
                     </div>
                 </div>
             </div>
