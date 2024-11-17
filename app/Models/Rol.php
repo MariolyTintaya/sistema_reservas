@@ -17,4 +17,8 @@ class Rol extends Model
     ];
 
     public $timestamps = false;
+    public function usuarios()
+    {
+        return $this->hasMany(Usuario::class, 'rol_id_rol', 'id_rol');
+    }
 }

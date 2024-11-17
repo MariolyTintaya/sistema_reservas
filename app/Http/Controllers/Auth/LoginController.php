@@ -3,38 +3,86 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
     /**
-     * Where to redirect users after login.
+     * Muestra el formulario de inicio de sesión.
      *
-     * @var string
+     * @return \Illuminate\View\View
      */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function showLoginForm()
     {
-        $this->middleware('guest')->except('logout');
-        $this->middleware('auth')->only('logout');
+        return view('auth.login'); // Asegúrate de que la vista auth.login exista
+    }
+
+    /**
+     * Maneja el inicio de sesión del usuario.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function login(Request $request)
+    {
+        // Valida las entradas
+        $request->validate([
+            'correo' => 'required|email',
+            'contraseña' => 'required',
+        ]);
+    
+        // Ajusta las credenciales para que usen 'password' en lugar de 'contraseña'
+        $credentials = [
+            'correo' => $request->input('correo'),
+            'contraseña' => $request->input('contraseña'), // Mapea al campo 'password'
+        ];
+    
+        // Intenta autenticar al usuario
+        if (Auth::attempt($credentials, $request->filled('remember'))) {
+            return redirect()->intended($this->redirectPath());
+        }
+    
+        // Si falla, regresa con un error
+        return back()->withErrors([
+            'correo' => 'Credenciales incorrectas.',
+        ])->onlyInput('correo');
+    }
+
+    /**
+     * Cierra la sesión del usuario.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
+    }
+
+    /**
+     * Define la ruta de redirección después del inicio de sesión.
+     *
+     * @return string
+     */
+    protected function redirectPath()
+    {
+        $user = Auth::user();
+    
+        // Redirigir basado en el rol del usuario
+        if ($user->rol_id_rol == 1) { // Suponiendo que 1 es Gerente
+            return '/dashboard/gerente';
+        } elseif ($user->rol_id_rol == 2) { // Suponiendo que 2 es Vendedor
+            return '/dashboard/vendedor';
+        }
+    
+        return '/welcome'; // Ruta por defecto
     }
 }
+

@@ -26,7 +26,7 @@ class UsuarioController extends Controller
         $usuario = new Usuario();
         $usuario->nombre = $request->nombre;
         $usuario->correo = $request->correo;
-        $usuario->contraseña = $request->contraseña; 
+        $usuario->contraseña = $request->contraseña;
         $usuario->activo = $request->activo;
         $usuario->rol_id_rol = $request->rol_id_rol;
         $usuario->save();

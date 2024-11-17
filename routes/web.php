@@ -8,7 +8,7 @@ use App\Http\Controllers\TransporteController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DepositoController;
 
-
+//------------------------ RUTAS MARIOLY  :3 --------------------------------
 Route::get('/', function () {
     return view('welcome');
 });
@@ -22,13 +22,11 @@ Route::get('/usuarios/editar/{id}', [UsuarioController::class, 'editarUsuario'])
 Route::put('/usuarios/{id}', [UsuarioController::class, 'actualizarUsuario'])->name('usuarios.actualizar');
 Route::delete('/usuarios/{id}', [UsuarioController::class, 'eliminarUsuario'])->name('usuarios.eliminar');
 
-
 use App\Http\Controllers\AuthController;
 
-
-
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login.form');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::get('loginReservas', [AuthController::class, 'showLoginForm'])->name('loginReservas');
+Route::post('loginReservas', [AuthController::class, 'loginReservas']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/gerente/dashboard', function () {
     return view('gerente.dashboard'); // Redirige a la vista gerente/dashboard.blade.php
@@ -42,6 +40,8 @@ Route::get('/vendedores/dashboard', function () {
 use App\Http\Controllers\VendedorController;
 
 Route::resource('vendedores', VendedorController::class);
+
+//--------------------------- FIN DE LAS RUTAS MARIOLY----------------------------
 
 //------------------------ RUTAS AILYN NO TOCAR :) --------------------------------
 Auth::routes();
@@ -57,7 +57,8 @@ Route::resource('depositos', DepositoController::class);
 //--------------------------- FIN DE LAS RUTAS AILYN :) ----------------------------
 
 
-// routes/web.php
+// routes/web.php 
+//quitar esto
 Route::get('/admin', function () {
     return view('admin_panel');
 });
