@@ -13,15 +13,15 @@
             <div class="card-body">
                 <h2 class="card-title text-center mb-4">Iniciar sesión</h2>
 
-                <form action="{{ route('login') }}" method="POST">
+                <form action="{{ route('loginReservas') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="correo">Correo:</label>
-                        <input type="email" class="form-control" id="correo" name="correo" required>
+                        <input type="email" class="form-control" id="correo" name="correo" >
                     </div>
                     <div class="form-group">
                         <label for="contraseña">Contraseña:</label>
-                        <input type="password" class="form-control" id="contraseña" name="contraseña" required>
+                        <input type="password" class="form-control" id="contraseña" name="contraseña" >
                     </div>
                     <button type="submit" class="btn btn-primary btn-block">Iniciar sesión</button>
                 </form>

@@ -1,39 +1,19 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Middleware;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ConfirmsPasswords;
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
-class ConfirmPasswordController extends Controller
+class ConfirmPasswordController
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Confirm Password Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller is responsible for handling password confirmations and
-    | uses a simple trait to include the behavior. You're free to explore
-    | this trait and override any functions that require customization.
-    |
-    */
-
-    use ConfirmsPasswords;
-
-    /**
-     * Where to redirect users when the intended url fails.
-     *
-     * @var string
-     */
-    protected $redirectTo = '/home';
-
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
+    public function handle(Request $request, Closure $next, $role)
     {
-        $this->middleware('auth');
+        if (Auth::check() && Auth::user()->rol->nombre === $role) {
+            return $next($request);
+        }
+
+        return redirect('/login')->withErrors(['no_access' => 'No tienes acceso a esta sección.']);
     }
 }
