@@ -7,6 +7,7 @@ use App\Http\Controllers\PaqueteController;
 use App\Http\Controllers\TransporteController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DepositoController;
+use App\Http\Controllers\ParadaController;
 
 //------------------------ RUTAS MARIOLY  :3 --------------------------------
 Route::get('/', function () {
@@ -54,6 +55,7 @@ Route::resource('paquetes', PaqueteController::class);
 Route::resource('transportes', TransporteController::class);
 Route::resource('clientes', ClienteController::class);
 Route::resource('depositos', DepositoController::class);
+Route::resource('paradas', ParadaController::class);
 //--------------------------- FIN DE LAS RUTAS AILYN :) ----------------------------
 
 
