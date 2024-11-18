@@ -46,5 +46,14 @@ class AuthController extends Controller
         // Redirigir de vuelta con un mensaje de error si no se encuentra coincidencia
         return redirect()->back()->withErrors(['loginReservas' => 'Credenciales incorrectas.']);
     }
+    public function logoutReservas(Request $request)
+    {
+    // Cerrar sesión del usuario
+    auth()->logout();
+
+    // Redirigir al usuario a la página de inicio de sesión
+    return redirect()->route('loginReservas');
+    }
+
 }
 

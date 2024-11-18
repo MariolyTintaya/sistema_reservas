@@ -27,7 +27,7 @@ use App\Http\Controllers\AuthController;
 
 Route::get('loginReservas', [AuthController::class, 'showLoginForm'])->name('loginReservas');
 Route::post('loginReservas', [AuthController::class, 'loginReservas']);
-Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+Route::post('logoutReservas', [AuthController::class, 'logoutReservas'])->name('logoutReservas');
 
 Route::get('/gerente/dashboard', function () {
     return view('gerente.dashboard'); // Redirige a la vista gerente/dashboard.blade.php
