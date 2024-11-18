@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Vendedor</title>
- 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body class="bg-gray-100 flex">
 
     <!-- Sidebar -->
     <div class="w-64 h-screen bg-purple-600 text-white">
         <div class="flex items-center justify-center p-4">
-            <h2 class="text-2xl font-bold">Mi Aplicación</h2>
+            <h2 class="text-2xl font-bold">London Travel Bolivia</h2>
         </div>
         <nav class="mt-6">
             <ul>
