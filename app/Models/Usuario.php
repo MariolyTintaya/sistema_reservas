@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+
 class Usuario extends Authenticatable
 {
     use HasFactory;
@@ -24,14 +25,11 @@ class Usuario extends Authenticatable
     ];
 
     public $timestamps = false;
-       // Especifica el nombre del campo de autenticación
-       // Mutator para encriptar la contraseña antes de guardarla
+     
     public function setContraseñaAttribute($value)
     {
            $this->attributes['contraseña'] = Hash::make($value);
     }
-   
-   
      // Define la relación con Rol
      public function rol()
      {

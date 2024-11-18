@@ -88,6 +88,12 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="dropdown relative">
+                                <a href="{{ route('loginReservas') }}" 
+                                  class="text-blue-500 hover:text-blue-700 text-lg font-medium">
+                                     Login
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
