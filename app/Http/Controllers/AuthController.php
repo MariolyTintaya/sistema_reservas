@@ -16,13 +16,13 @@ class AuthController extends Controller
         // Validar los campos de entrada
         $request->validate([
             'correo' => 'required|email|exists:usuario,correo', // Asegura que el correo esté registrado
-            'contraseña' => 'required|min:6', // Contraseña mínima de 6 caracteres
+            'contraseña' => 'required|min:8', // Contraseña mínima de 8 caracteres
         ], [
             'correo.required' => 'El correo es obligatorio.',
             'correo.email' => 'Por favor ingresa un correo válido.',
             'correo.exists' => 'Este correo no está registrado.',
             'contraseña.required' => 'La contraseña es obligatoria.',
-            'contraseña.min' => 'La contraseña debe tener al menos 6 caracteres.',
+            'contraseña.min' => 'La contraseña debe tener al menos 8 caracteres.',
         ]);
 
         // Recuperar los valores de entrada
