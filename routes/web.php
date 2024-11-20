@@ -29,14 +29,16 @@ Route::get('loginReservas', [AuthController::class, 'showLoginForm'])->name('log
 Route::post('loginReservas', [AuthController::class, 'loginReservas']);
 Route::post('logoutReservas', [AuthController::class, 'logoutReservas'])->name('logoutReservas');
 
+// Ruta para el dashboard del Gerente
 Route::get('/gerente/dashboard', function () {
     return view('gerente.dashboard'); // Redirige a la vista gerente/dashboard.blade.php
-})->name('gerente.dashboard');
+})->name('gerente.dashboard')->middleware('auth'); // Asegúrate de que esté protegido por autenticación
 
 // Ruta para el dashboard del Vendedor
 Route::get('/vendedores/dashboard', function () {
     return view('vendedores.dashboard'); // Redirige a la vista vendedor/dashboard.blade.php
-})->name('vendedor.dashboard');
+})->name('vendedor.dashboard')->middleware('auth'); // Asegúrate de que esté protegido por autenticación
+
 
 use App\Http\Controllers\VendedorController;
 
