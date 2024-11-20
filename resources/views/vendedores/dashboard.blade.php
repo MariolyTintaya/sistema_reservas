@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel Gerente</title>
+    <title>Panel Vendedor</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Agregar Bootstrap CDN -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
@@ -24,16 +24,16 @@
                 <span class="navbar-text me-3">
                     No hay usuario autenticado.
                 </span>
-                 @endif
+                @endif
                 <!-- Enlace para cerrar sesión -->
-                    <a href="{{ route('logoutReservas') }}" class="btn btn-link" 
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a href="{{ route('logoutReservas') }}" class="btn btn-link"
+                   onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Cerrar sesión
-                    </a>
+                </a>
 
-                    <form id="logout-form" action="{{ route('logoutReservas') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ route('logoutReservas') }}" method="POST" style="display: none;">
                     @csrf
-                    </form>
+                </form>
             </div>
         </div>
     </nav>
@@ -82,5 +82,5 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 
-</body>
-</html>
+</bo
+

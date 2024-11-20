@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Usuario extends Authenticatable
@@ -26,10 +27,6 @@ class Usuario extends Authenticatable
 
     public $timestamps = false;
      
-    public function setContraseñaAttribute($value)
-    {
-           $this->attributes['contraseña'] = Hash::make($value);
-    }
      // Define la relación con Rol
      public function rol()
      {
