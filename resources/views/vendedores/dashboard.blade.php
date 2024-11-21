@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,7 +16,7 @@
         <div class="container-fluid">
             <span class="navbar-brand mb-0 h1">Panel Vendedor</span>
             <div class="d-flex">
-                <!-- Mostrar el nombre del usuario logueado -->
+                <!-- Mostrar el nombre del usuario logueado siuu  -->
                 @if (Auth::check())
                 <span class="navbar-text me-3">
                     {{ Auth::user()->nombre }}
