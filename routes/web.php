@@ -27,9 +27,9 @@ Route::delete('/usuarios/{id}', [UsuarioController::class, 'eliminarUsuario'])->
 
 use App\Http\Controllers\AuthController;
 
-Route::get('loginReservas', [AuthController::class, 'showLoginForm'])->name('loginReservas');
-Route::post('loginReservas', [AuthController::class, 'loginReservas']);
-Route::post('logoutReservas', [AuthController::class, 'logoutReservas'])->name('logoutReservas');
+Route::get('login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('login', [AuthController::class, 'login']);
+Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
 // Ruta para el dashboard del Gerente
 Route::get('/gerente/dashboard', function () {

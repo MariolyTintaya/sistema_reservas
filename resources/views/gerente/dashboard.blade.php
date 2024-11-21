@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,6 +74,10 @@
             font-size: 1.25rem;
             text-decoration: none;
         }
+        .user-name {
+    color: white; /* Cambia el color del texto a blanco */
+    font-weight: bold; /* Hace el texto en negrita */
+}
     </style>
 </head>
 
@@ -86,7 +89,7 @@
             <span class="navbar-brand mb-0 h1">Panel Gerente</span>
             <div class="d-flex">
                 @if (Auth::check())
-                <span class="navbar-text me-3">
+                <span class="navbar-text me-3 user-name">
                     {{ Auth::user()->nombre }}
                 </span>
                 @else
@@ -94,11 +97,11 @@
                     No hay usuario autenticado.
                 </span>
                 @endif
-                <a href="{{ route('logoutReservas') }}" class="btn btn-link"
+                <a href="{{ route('logout') }}" class="btn btn-link"
                     onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Cerrar sesión
                 </a>
-                <form id="logout-form" action="{{ route('logoutReservas') }}" method="POST" style="display: none;">
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                     @csrf
                 </form>
             </div>
