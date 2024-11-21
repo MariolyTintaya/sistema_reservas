@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 class AuthController extends Controller
 {
-    public function showLoginForm()
+    public function showLoginFormReservas()
     {
         return view('loginReservas');
     }
