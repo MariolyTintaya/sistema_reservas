@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\TipoCliente; 
 
 /**
  * Class Cliente
@@ -23,6 +24,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cliente extends Model
 {
+    public $timestamps = false;
+    
      // Define la tabla en singular
      protected $table = 'cliente';
 
@@ -43,9 +46,9 @@ class Cliente extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
+   
     public function tipoCliente()
     {
-        return $this->belongsTo(\App\Models\TipoCliente::class, 'tipo_cliente_id_tipo', 'id_tipo');
+        return $this->belongsTo(TipoCliente::class, 'tipo_cliente_id_tipo', 'id_tipo');
     }
-    
 }

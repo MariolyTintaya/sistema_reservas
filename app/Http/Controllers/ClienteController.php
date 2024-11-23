@@ -16,11 +16,14 @@ class ClienteController extends Controller
      */
     public function index(Request $request): View
     {
-        $clientes = Cliente::paginate();
+
+        $clientes = Cliente::with('tipoCliente')->paginate(10);
 
         return view('cliente.index', compact('clientes'))
             ->with('i', ($request->input('page', 1) - 1) * $clientes->perPage());
-    }
+   
+   
+        }
 
     /**
      * Show the form for creating a new resource.

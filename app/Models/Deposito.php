@@ -20,6 +20,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Deposito extends Model
 {
+    public $timestamps = false;
      // Define la tabla en singular
      protected $table = 'deposito';
 

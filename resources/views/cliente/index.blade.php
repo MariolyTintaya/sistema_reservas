@@ -62,7 +62,7 @@
 										<td >{{ $cliente->ape_materno }}</td>
 										<td >{{ $cliente->fecha_nac }}</td>
 										<td >{{ $cliente->activo }}</td>
-										<td >{{ $cliente->tipo_cliente_id_tipo }}</td>
+										<td >{{ $cliente->tipoCliente->descripcion }}</td>
 
                                             <td>
                                                 <form action="{{ route('clientes.destroy', $cliente->id_cliente) }}" method="POST">
