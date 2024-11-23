@@ -76,7 +76,7 @@ class ParadaController extends Controller
 
     public function destroy($id_parada): RedirectResponse
     {
-        Parada::find($id_parada)->delete();
+        Parada::find($id)->delete();
 
         return Redirect::route('paradas.index')
             ->with('success', 'Parada deleted successfully');
