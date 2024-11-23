@@ -25,6 +25,9 @@ class Parada extends Model
     // Define la clave primaria personalizada
     protected $primaryKey = 'id_parada';
 
+    // Desactivar los timestamps (created_at y updated_at)
+    public $timestamps = false;
+
     protected $perPage = 20;
 
     /**

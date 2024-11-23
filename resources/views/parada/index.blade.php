@@ -1,66 +1,79 @@
 @extends('layouts.app')
 
-@section('content')
-<div class="py-12">
-    <div class="max-w-full mx-auto sm:px-6 lg:px-8 space-y-6">
-        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
-            <div class="w-full">
-                <div class="sm:flex sm:items-center">
-                    <div class="sm:flex-auto">
-                        <h1 class="text-base font-semibold leading-6 text-gray-900">{{ __('Paradas') }}</h1>
-                        <p class="mt-2 text-sm text-gray-700">A list of all the {{ __('Paradas') }}.</p>
-                    </div>
-                    <div class="mt-4 sm:ml-16 sm:mt-0 sm:flex-none">
-                        <a type="button" href="{{ route('paradas.create') }}" class="block rounded-md bg-indigo-600 px-3 py-2 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">Add new</a>
-                    </div>
-                </div>
+@section('template_title')
+    Paradas
+@endsection
 
-                <div class="flow-root">
-                    <div class="mt-8 overflow-x-auto">
-                        <div class="inline-block min-w-full py-2 align-middle">
-                            <table class="w-full divide-y divide-gray-300">
-                                <thead>
+@section('content')
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+
+                            <span id="card_title">
+                                {{ __('Paradas') }}
+                            </span>
+
+                             <div class="float-right">
+                                <a href="{{ route('paradas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                  {{ __('Create New') }}
+                                </a>
+                              </div>
+                        </div>
+                    </div>
+                    @if ($message = Session::get('success'))
+                        <div class="alert alert-success m-4">
+                            <p>{{ $message }}</p>
+                        </div>
+                    @endif
+
+                    <div class="card-body bg-white">
+                        <div class="table-responsive">
+                            <table class="table table-striped table-hover">
+                                <thead class="thead">
                                     <tr>
-                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">No</th>
-                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Id Parada</th>
-                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Nombre</th>
-                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Descripcion</th>
-                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Activo</th>
-                                        <th scope="col" class="py-3 pl-4 pr-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500">Ruta Id Ruta</th>
-                                        <th scope="col" class="px-3 py-3 text-left text-xs font-semibold uppercase tracking-wide text-gray-500"></th>
+                                        <th>No</th>
+                                        
+									<th >Id Parada</th>
+									<th >Nombre</th>
+									<th >Descripcion</th>
+									<th >Activo</th>
+									<th >Ruta Id Ruta</th>
+
+                                        <th></th>
                                     </tr>
                                 </thead>
-                                <tbody class="divide-y divide-gray-200 bg-white">
+                                <tbody>
                                     @foreach ($paradas as $parada)
-                                        <tr class="even:bg-gray-50">
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-semibold text-gray-900">{{ ++$i }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $parada->id_parada }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $parada->nombre }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $parada->descripcion }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $parada->activo }}</td>
-                                            <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $parada->ruta_id_ruta }}</td>
-                                            <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900">
+                                        <tr>
+                                            <td>{{ ++$i }}</td>
+                                            
+										<td >{{ $parada->id_parada }}</td>
+										<td >{{ $parada->nombre }}</td>
+										<td >{{ $parada->descripcion }}</td>
+										<td >{{ $parada->activo }}</td>
+										<td >{{ $parada->ruta_id_ruta }}</td>
+
+                                            <td>
                                                 <form action="{{ route('paradas.destroy', $parada->id_parada) }}" method="POST">
-                                                    <a href="{{ route('paradas.show', $parada->id_parada) }}" class="text-gray-600 font-bold hover:text-gray-900 mr-2">{{ __('Show') }}</a>
-                                                    <a href="{{ route('paradas.edit', $parada->id_parada) }}" class="text-indigo-600 font-bold hover:text-indigo-900 mr-2">{{ __('Edit') }}</a>
+                                                    <a class="btn btn-sm btn-primary " href="{{ route('paradas.show', $parada->id_parada) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
+                                                    <a class="btn btn-sm btn-success" href="{{ route('paradas.edit', $parada->id_parada) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
                                                     @csrf
                                                     @method('DELETE')
-                                                    <a href="#" class="text-red-600 font-bold hover:text-red-900" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;">{{ __('Delete') }}</a>
+                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
                                                 </form>
                                             </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
                             </table>
-
-                            <div class="mt-4 px-4">
-                                {!! $paradas->withQueryString()->links() !!}
-                            </div>
                         </div>
                     </div>
                 </div>
+                {!! $paradas->withQueryString()->links() !!}
             </div>
         </div>
     </div>
-</div>
 @endsection
