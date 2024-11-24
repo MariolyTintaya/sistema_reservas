@@ -25,6 +25,7 @@
                     @error('correo')
                         <span class="text-red-600 text-sm">{{ $message }}</span>
                     @enderror
+                    
                 </div>
                 <div class="mb-4">
                     <label for="contraseña" class="block text-gray-700 font-medium">Contraseña:</label>
@@ -42,26 +43,37 @@
                             Recordarme
                         </label>
                     </div>
-                    @if (Route::has('password.request'))
-                        <a href="{{ route('password.request') }}" class="text-sm text-purple-600 hover:underline">
-                            ¿Olvidaste tu contraseña?
-                        </a>
-                    @endif
+                  
                 </div>
                 <button type="submit" 
                         class="w-full bg-purple-600 hover:bg-purple-700 text-white py-2 rounded-md font-medium transition duration-300">
                     Iniciar sesión
                 </button>
             </form>
-
-            <!-- Muestra los mensajes de error -->
-            @if ($errors->any())
-                <div class="mt-4 bg-red-100 text-red-600 p-3 rounded-md">
-                    @foreach ($errors->all() as $error)
-                        <p>{{ $error }}</p>
-                    @endforeach
-                </div>
-            @endif
+            @if(session('secondsRemaining'))
+            <div id="countdown" class="bg-white text-red-600 p-4 mt-4 rounded-md border border-red-600">
+                        Has realizado demasiados intentos. Espera <span id="time">{{ session('secondsRemaining') }}</span> segundos para volver a intentarlo.
+                    </div>
+            <script>
+                // Obtener los segundos restantes
+                let secondsRemaining = {{ session('secondsRemaining') }};
+                
+                // Función que actualiza la cuenta regresiva
+                function updateCountdown() {
+                    if (secondsRemaining > 0) {
+                        secondsRemaining--;
+                        document.getElementById('time').innerText = secondsRemaining;
+                    } else {
+                        // La cuenta regresiva ha terminado, se puede ocultar el mensaje
+                        document.getElementById('countdown').style.display = 'none';
+                    }
+                }
+        
+                // Actualizar la cuenta regresiva cada segundo
+                setInterval(updateCountdown, 1000);
+            </script>
+        @endif
+    
         </div>
     </div>
 </body>

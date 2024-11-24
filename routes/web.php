@@ -21,7 +21,8 @@ Route::get('/usuarios', [UsuarioController::class, 'verUsuarios'])->name('usuari
 Route::get('/usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
 Route::post('/usuarios/create', [UsuarioController::class, 'agregarUsuario'])->name('usuarios.agregar');
 Route::post('/usuarios', [UserController::class, 'store'])->name('usuarios.store');
-Route::get('/usuarios/editar/{id}', [UsuarioController::class, 'editarUsuario'])->name('usuarios.editar');
+
+Route::get('/usuarios/edit/{id}', [UsuarioController::class, 'editarUsuario'])->name('usuarios.editar');
 Route::put('/usuarios/{id}', [UsuarioController::class, 'actualizarUsuario'])->name('usuarios.actualizar');
 Route::delete('/usuarios/{id}', [UsuarioController::class, 'eliminarUsuario'])->name('usuarios.eliminar');
 
@@ -60,6 +61,7 @@ Route::resource('transportes', TransporteController::class);
 Route::resource('clientes', ClienteController::class);
 Route::resource('depositos', DepositoController::class);
 Route::resource('reservas', ReservaController::class);
+Route::post('/check-deposito', [ReservaController::class, 'checkDeposito'])->name('reserva.checkDeposito');
 Route::resource('paradas', ParadaController::class);
 //--------------------------- FIN DE LAS RUTAS AILYN :) ----------------------------
 
