@@ -13,9 +13,11 @@ class RemoveMontoTotalFromReservaTable extends Migration
      */
     public function up()
     {
-        Schema::table('reserva', function (Blueprint $table) {
-            $table->dropColumn('monto_total');
-        });
+        if (!Schema::hasTable('reserva')) {
+            Schema::table('reserva', function (Blueprint $table) {
+                $table->dropColumn('monto_total');
+            });
+        }
     }
 
     /**
