@@ -25,7 +25,7 @@ class GuiumRequest extends FormRequest
 			'id_guia' => 'required',
 			'nombre' => 'required|string',
 			'celular' => 'required',
-			'disponibilidad' => 'required|string',
+            'disponibilidad' => 'required|in:Mañana,Tarde,Noche',
 			'activo' => 'required',
 			'tour_id_tour' => 'required',
         ];

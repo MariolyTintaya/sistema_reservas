@@ -1,9 +1,14 @@
 <div class="row padding-1 p-1">
-    <div class="col-md-12">
-        
         <div class="form-group mb-2 mb20">
             <label for="id_guia" class="form-label">{{ __('Id Guia') }}</label>
-            <input type="text" name="id_guia" class="form-control @error('id_guia') is-invalid @enderror" value="{{ old('id_guia', $guium?->id_guia) }}" id="id_guia" placeholder="Id Guia">
+            <input 
+                type="text" 
+                name="id_guia" 
+                class="form-control @error('id_guia') is-invalid @enderror" 
+                value="{{ old('id_guia', $guium?->id_guia) }}" 
+                id="id_guia" 
+                placeholder="Id Guia" 
+                readonly>
             {!! $errors->first('id_guia', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
@@ -18,22 +23,40 @@
         </div>
         <div class="form-group mb-2 mb20">
             <label for="disponibilidad" class="form-label">{{ __('Disponibilidad') }}</label>
-            <input type="text" name="disponibilidad" class="form-control @error('disponibilidad') is-invalid @enderror" value="{{ old('disponibilidad', $guium?->disponibilidad) }}" id="disponibilidad" placeholder="Disponibilidad">
+            <select name="disponibilidad" id="disponibilidad" class="form-control @error('disponibilidad') is-invalid @enderror">
+                <option value="">Seleccione una opción</option>
+                @foreach ($disponibilidadOptions as $option)
+                    <option value="{{ $option }}" {{ old('disponibilidad', $guium->disponibilidad) == $option ? 'selected' : '' }}>
+                        {{ $option }}
+                    </option>
+                @endforeach
+            </select>
             {!! $errors->first('disponibilidad', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+
         <div class="form-group mb-2 mb20">
             <label for="activo" class="form-label">{{ __('Activo') }}</label>
-            <input type="text" name="activo" class="form-control @error('activo') is-invalid @enderror" value="{{ old('activo', $guium?->activo) }}" id="activo" placeholder="Activo">
+            <input type="text" name="activo" class="form-control @error('activo') is-invalid @enderror" 
+                value="{{ old('activo', $guium?->activo ?? 1) }}" id="activo" placeholder="Activo" readonly>
             {!! $errors->first('activo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+
         <div class="form-group mb-2 mb20">
-            <label for="tour_id_tour" class="form-label">{{ __('Tour Id Tour') }}</label>
-            <input type="text" name="tour_id_tour" class="form-control @error('tour_id_tour') is-invalid @enderror" value="{{ old('tour_id_tour', $guium?->tour_id_tour) }}" id="tour_id_tour" placeholder="Tour Id Tour">
+            <label for="tour_id_tour" class="form-label">{{ __('Tour') }}</label>
+            <select name="tour_id_tour" id="tour_id_tour" class="form-control @error('tour_id_tour') is-invalid @enderror">
+                <option value="">Seleccione un tour</option>
+                @foreach($tours as $tour)
+                    <option value="{{ $tour->id_tour }}" 
+                        {{ old('tour_id_tour', $guium?->tour_id_tour) == $tour->id_tour ? 'selected' : '' }}>
+                        {{ $tour->informe }}  <!-- Muestra el 'informe' en lugar del 'id' -->
+                    </option>
+                @endforeach
+            </select>
             {!! $errors->first('tour_id_tour', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
     </div>
     <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('Guardar') }}</button>
     </div>
 </div>
