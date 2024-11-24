@@ -8,9 +8,11 @@ return new class extends Migration
 {
     public function up()
     {
-        Schema::table('usuario', function (Blueprint $table) {
-            $table->string('remember_token', 100)->nullable();
-        });
+        if (!Schema::hasTable('usuario')) {
+            Schema::table('usuario', function (Blueprint $table) {
+                $table->string('remember_token', 100)->nullable();
+            });
+        }
     }
     
     public function down()

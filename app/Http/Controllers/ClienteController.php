@@ -27,10 +27,17 @@ class ClienteController extends Controller
      */
     public function create(): View
     {
+        // Obtener el último ID de cliente y calcular el siguiente
+        $lastClienteId = Cliente::max('id_cliente');
+        $nextClienteId = $lastClienteId ? $lastClienteId + 1 : 1;
+
+        // Crear una nueva instancia del cliente
         $cliente = new Cliente();
 
-        return view('cliente.create', compact('cliente'));
+        // Pasar el siguiente ID a la vista
+        return view('cliente.create', compact('cliente', 'nextClienteId'));
     }
+
 
     /**
      * Store a newly created resource in storage.
@@ -56,12 +63,23 @@ class ClienteController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id_cliente): View
+    public function edit($id_cliente)
     {
+        // Buscar al cliente por el ID
         $cliente = Cliente::find($id_cliente);
 
+        // Verificar si el cliente existe
+        if (!$cliente) {
+            return redirect()->route('clientes.index')->with('error', 'Cliente no encontrado');
+        }
+
+        // Retornar la vista con los datos del cliente
         return view('cliente.edit', compact('cliente'));
     }
+
+
+
+
 
     /**
      * Update the specified resource in storage.

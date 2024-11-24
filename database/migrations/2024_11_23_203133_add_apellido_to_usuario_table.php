@@ -8,9 +8,11 @@ class AddApellidoToUsuarioTable extends Migration
 {
     public function up()
     {
-        Schema::table('usuario', function (Blueprint $table) {
-            $table->string('apellido', 255)->nullable()->after('nombre'); // Agrega el campo después de 'nombre'
-        });
+        if (!Schema::hasTable('usuario')) {
+            Schema::table('usuario', function (Blueprint $table) {
+                $table->string('apellido', 255)->nullable()->after('nombre'); // Agrega el campo después de 'nombre'
+            });
+        }
     }
 
     public function down()

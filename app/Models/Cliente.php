@@ -28,7 +28,9 @@ class Cliente extends Model
 
      // Define la clave primaria personalizada
      protected $primaryKey = 'id_cliente';
- 
+
+        // Desactivar los timestamps (created_at y updated_at)
+        public $timestamps = false;
     
     protected $perPage = 20;
 
