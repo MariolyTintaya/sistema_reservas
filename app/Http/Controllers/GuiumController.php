@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\GuiumRequest;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\Tour;
 
 class GuiumController extends Controller
 {
@@ -16,7 +17,8 @@ class GuiumController extends Controller
      */
     public function index(Request $request): View
     {
-        $guia = Guium::paginate();
+        // Cargar la relación con 'tour' para cada guium
+        $guia = Guium::with('tour')->paginate();
 
         return view('guium.index', compact('guia'))
             ->with('i', ($request->input('page', 1) - 1) * $guia->perPage());
@@ -27,28 +29,49 @@ class GuiumController extends Controller
      */
     public function create(): View
     {
-        $guium = new Guium();
+        // Obtener el último id_guia registrado
+        $lastGuium = Guium::orderBy('id_guia', 'desc')->first();
+        $nextId = $lastGuium ? $lastGuium->id_guia + 1 : 1;
 
-        return view('guium.create', compact('guium'));
+        // Crear una nueva instancia de Guium con el id_guia precalculado
+        $guium = new Guium();
+        $guium->id_guia = $nextId;
+
+        // Opciones para el campo disponibilidad
+        $disponibilidadOptions = ['Mañana', 'Tarde', 'Noche'];
+
+        // Obtener todos los tours disponibles
+        $tours = Tour::all(); // Asegúrate de tener el modelo Tour correctamente definido
+
+        return view('guium.create', compact('guium', 'disponibilidadOptions', 'tours'));
     }
 
+    
     /**
      * Store a newly created resource in storage.
      */
     public function store(GuiumRequest $request): RedirectResponse
     {
-        Guium::create($request->validated());
+        // Obtener el último id_guia registrado
+        $lastGuium = Guium::orderBy('id_guia', 'desc')->first();
+        $nextId = $lastGuium ? $lastGuium->id_guia + 1 : 1;
+
+        // Crear un nuevo registro asegurando el id_guia
+        $guia = new Guium($request->except('id_guia'));
+        $guia->id_guia = $nextId;
+        $guia->save();
 
         return Redirect::route('guia.index')
-            ->with('success', 'Guium created successfully.');
+            ->with('success', 'Guia creado exitosamente.');
     }
+
 
     /**
      * Display the specified resource.
      */
-    public function show($id): View
+    public function show($id_guia): View
     {
-        $guium = Guium::find($id);
+        $guium = Guium::find($id_guia);
 
         return view('guium.show', compact('guium'));
     }
@@ -56,12 +79,19 @@ class GuiumController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id): View
+    public function edit($id_guia): View
     {
-        $guium = Guium::find($id);
+        $guium = Guium::find($id_guia);
 
-        return view('guium.edit', compact('guium'));
+        // Opciones para el campo disponibilidad
+        $disponibilidadOptions = ['Mañana', 'Tarde', 'Noche'];
+
+        // Obtener todos los tours disponibles
+        $tours = Tour::all(); // Asegúrate de tener el modelo Tour correctamente definido
+
+        return view('guium.edit', compact('guium', 'disponibilidadOptions', 'tours'));
     }
+
 
     /**
      * Update the specified resource in storage.
@@ -71,14 +101,17 @@ class GuiumController extends Controller
         $guium->update($request->validated());
 
         return Redirect::route('guia.index')
-            ->with('success', 'Guium updated successfully');
+            ->with('success', 'Guia actualizado exitosamente.');
     }
 
-    public function destroy($id): RedirectResponse
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy($id_guia): RedirectResponse
     {
-        Guium::find($id)->delete();
+        Guium::find($id_guia)->delete();
 
         return Redirect::route('guia.index')
-            ->with('success', 'Guium deleted successfully');
+            ->with('success', 'Guia eliminado exitosamente.');
     }
 }
