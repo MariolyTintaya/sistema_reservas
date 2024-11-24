@@ -1,20 +1,24 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Vendedor</title>
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
+</head>
 
-@section('template_title')
-    {{ $paquete->name ?? __('Show') . " " . __('Paquete') }}
-@endsection
-
-@section('content')
+<body class="bg-gray-100 flex flex-col">
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
                         <div class="float-left">
-                            <span class="card-title">{{ __('Show') }} Paquete</span>
+                            <span class="card-title">{{ __('Inormacion') }} del Paquete</span>
                         </div>
                         <div class="float-right">
-                            <a class="btn btn-primary btn-sm" href="{{ route('paquetes.index') }}"> {{ __('Back') }}</a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('paquetes.index') }}"> {{ __('Volver') }}</a>
                         </div>
                     </div>
 
@@ -53,13 +57,12 @@
                                     {{ $paquete->activo }}
                                 </div>
                                 <div class="form-group mb-2 mb20">
-                                    <strong>Tour Id Tour:</strong>
-                                    {{ $paquete->tour_id_tour }}
+                                    <strong>Tour:</strong>
+                                    {{ $paquete->tour->informe ?? 'No disponible' }}
                                 </div>
-
                     </div>
                 </div>
             </div>
         </div>
     </section>
-@endsection
+</body>
