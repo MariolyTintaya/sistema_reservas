@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
  * Class Reserva
  *
  * @property $id_reserva
- * @property $monto_total
  * @property $num_personas
  * @property $fecha_creacion
  * @property $activo
@@ -42,8 +41,16 @@ class Reserva extends Model
      *
      * @var array<int, string>
      */
-    protected $fillable = ['id_reserva', 'monto_total', 'num_personas', 'fecha_creacion', 'activo', 'tour_id_tour', 'cliente_id_cliente', 'deposito_id_deposito', 'usuario_id_usuario'];
-
+    protected $fillable = [
+        'id_reserva',
+        'num_personas',
+        'fecha_creacion',
+        'activo',
+        'tour_id_tour',
+        'cliente_id_cliente',
+        'deposito_id_deposito',
+        'usuario_id_usuario'
+    ];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -52,7 +59,7 @@ class Reserva extends Model
     {
         return $this->belongsTo(\App\Models\Cliente::class, 'cliente_id_cliente', 'id_cliente');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -60,7 +67,7 @@ class Reserva extends Model
     {
         return $this->belongsTo(\App\Models\Deposito::class, 'deposito_id_deposito', 'id_deposito');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -68,7 +75,7 @@ class Reserva extends Model
     {
         return $this->belongsTo(\App\Models\Tour::class, 'tour_id_tour', 'id_tour');
     }
-    
+
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -76,5 +83,5 @@ class Reserva extends Model
     {
         return $this->belongsTo(\App\Models\Usuario::class, 'usuario_id_usuario', 'id_usuario');
     }
-    
 }
+

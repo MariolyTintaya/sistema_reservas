@@ -20,6 +20,7 @@
                         <tr>
                             <th>Id</th>
                             <th>Nombre</th>
+                            <th>Apellido</th>
                             <th>Correo</th>
                             <th>Activo</th>
                             <th>Rol</th>
@@ -32,6 +33,7 @@
                             <tr>
                                 <td>{{ $usuario->id_usuario }}</td>
                                 <td>{{ $usuario->nombre }}</td>
+                                <td>{{ $usuario->apellido }}</td>
                                 <td>{{ $usuario->correo }}</td>
                                 <td>{{ $usuario->activo }}</td>
                                 <td>{{ $usuario->rol->nombre_rol }}</td> <!-- Muestra el nombre del rol -->

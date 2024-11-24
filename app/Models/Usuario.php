@@ -16,11 +16,14 @@ class Usuario extends Authenticatable
 
     protected $fillable = [
         'nombre',
+        'apellido', // Agrega el nuevo campo aquí
         'correo',
         'contraseña',
         'activo',
         'rol_id_rol'
     ];
+    // Asegúrate de que remember_token no esté en el array de $fillable
+    protected $guarded = ['remember_token']; // Opcional, si no necesitas remember_token
     protected $hidden = [
         'contraseña',
     ];
@@ -37,5 +40,6 @@ class Usuario extends Authenticatable
     {
         return $this->contraseña;
     }
+   
 
 }

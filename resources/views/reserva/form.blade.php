@@ -1,49 +1,74 @@
 <div class="row padding-1 p-1">
     <div class="col-md-12">
-        
+            <!-- Campo Id de la Reserva -->
         <div class="form-group mb-2 mb20">
             <label for="id_reserva" class="form-label">{{ __('Id Reserva') }}</label>
-            <input type="text" name="id_reserva" class="form-control @error('id_reserva') is-invalid @enderror" value="{{ old('id_reserva', $reserva?->id_reserva) }}" id="id_reserva" placeholder="Id Reserva">
+            <input type="text" name="id_reserva" class="form-control @error('id_reserva') is-invalid @enderror" 
+                   value="{{ old('id_reserva', $ultimoId + 1) }}" id="id_reserva" placeholder="Id Reserva" readonly>
             {!! $errors->first('id_reserva', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
-        <div class="form-group mb-2 mb20">
-            <label for="monto_total" class="form-label">{{ __('Monto Total') }}</label>
-            <input type="text" name="monto_total" class="form-control @error('monto_total') is-invalid @enderror" value="{{ old('monto_total', $reserva?->monto_total) }}" id="monto_total" placeholder="Monto Total">
-            {!! $errors->first('monto_total', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
+           <!-- Campo Nombre del Cliente -->
+           <div class="form-group mb-2 mb20">
+            <label for="cliente_id_cliente" class="form-label">{{ __('Seleccione Cliente') }}</label>
+             <select name="cliente_id_cliente" id="cliente_id_cliente" class="form-control">
+                <option value="">Seleccione un cliente</option>
+                @foreach ($clientes as $cliente)
+                    <option value="{{ $cliente->id_cliente }}">
+                        {{ $cliente->nombre }} {{ $cliente->ape_paterno}} {{ $cliente->ape_materno}}
+                    </option>
+                @endforeach
+             </select>
+           </div>
+           <div class="form-group mb-2 mb20">
+            <button type="button" id="check-deposito" class="btn btn-primary">Verificar Depósito</button>
+           </div>
+        
+        <div id="deposito-message" class="mt-2"></div>
+        <!-- Campo Numero de Personas -->
         <div class="form-group mb-2 mb20">
             <label for="num_personas" class="form-label">{{ __('Num Personas') }}</label>
-            <input type="text" name="num_personas" class="form-control @error('num_personas') is-invalid @enderror" value="{{ old('num_personas', $reserva?->num_personas) }}" id="num_personas" placeholder="Num Personas">
+            <input type="number" 
+                   name="num_personas" 
+                   class="form-control @error('num_personas') is-invalid @enderror" 
+                   value="{{ old('num_personas', $reserva?->num_personas ?? 1) }}" 
+                   id="num_personas" 
+                   placeholder="Num Personas" 
+                   min="1" 
+                   step="1">
             {!! $errors->first('num_personas', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
+        </div> 
+         <!-- Campo Fecha de Creacion -->
+         <div class="form-group mb-2 mb20">
             <label for="fecha_creacion" class="form-label">{{ __('Fecha Creacion') }}</label>
-            <input type="text" name="fecha_creacion" class="form-control @error('fecha_creacion') is-invalid @enderror" value="{{ old('fecha_creacion', $reserva?->fecha_creacion) }}" id="fecha_creacion" placeholder="Fecha Creacion">
+            <input type="date" 
+                   name="fecha_creacion" 
+                   class="form-control @error('fecha_creacion') is-invalid @enderror" 
+                   value="{{ old('fecha_creacion', $reserva?->fecha_creacion ?? date('Y-m-d')) }}" 
+                   id="fecha_creacion" 
+                   placeholder="Fecha Creacion" 
+                   readonly>
             {!! $errors->first('fecha_creacion', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
-        <div class="form-group mb-2 mb20">
-            <label for="activo" class="form-label">{{ __('Activo') }}</label>
-            <input type="text" name="activo" class="form-control @error('activo') is-invalid @enderror" value="{{ old('activo', $reserva?->activo) }}" id="activo" placeholder="Activo">
-            {!! $errors->first('activo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
+          <!-- Campo Oculto Activo (Se llenara 1 por defecto) -->
+        <input type="hidden" name="activo" value="1">
         <div class="form-group mb-2 mb20">
             <label for="tour_id_tour" class="form-label">{{ __('Tour Id Tour') }}</label>
             <input type="text" name="tour_id_tour" class="form-control @error('tour_id_tour') is-invalid @enderror" value="{{ old('tour_id_tour', $reserva?->tour_id_tour) }}" id="tour_id_tour" placeholder="Tour Id Tour">
             {!! $errors->first('tour_id_tour', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
+              <!-- Campo Deposito se guardara automaticamente el id -->
+              
+        <!-- Campo Vendedor Aun falta arreglar  -->
         <div class="form-group mb-2 mb20">
-            <label for="cliente_id_cliente" class="form-label">{{ __('Cliente Id Cliente') }}</label>
-            <input type="text" name="cliente_id_cliente" class="form-control @error('cliente_id_cliente') is-invalid @enderror" value="{{ old('cliente_id_cliente', $reserva?->cliente_id_cliente) }}" id="cliente_id_cliente" placeholder="Cliente Id Cliente">
-            {!! $errors->first('cliente_id_cliente', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="deposito_id_deposito" class="form-label">{{ __('Deposito Id Deposito') }}</label>
-            <input type="text" name="deposito_id_deposito" class="form-control @error('deposito_id_deposito') is-invalid @enderror" value="{{ old('deposito_id_deposito', $reserva?->deposito_id_deposito) }}" id="deposito_id_deposito" placeholder="Deposito Id Deposito">
-            {!! $errors->first('deposito_id_deposito', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="usuario_id_usuario" class="form-label">{{ __('Usuario Id Usuario') }}</label>
-            <input type="text" name="usuario_id_usuario" class="form-control @error('usuario_id_usuario') is-invalid @enderror" value="{{ old('usuario_id_usuario', $reserva?->usuario_id_usuario) }}" id="usuario_id_usuario" placeholder="Usuario Id Usuario">
+            <label for="usuario_id_usuario" class="form-label">{{ __('Usuario') }}</label>
+            <input 
+                type="text" 
+                name="usuario_id_usuario" 
+                class="form-control @error('usuario_id_usuario') is-invalid @enderror" 
+                value="{{ old('usuario_id_usuario', $usuarioAutenticado->name ?? '') }}" 
+                id="usuario_id_usuario" 
+                placeholder="Nombre del Usuario" 
+                readonly>
             {!! $errors->first('usuario_id_usuario', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
@@ -52,3 +77,42 @@
         <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
     </div>
 </div>
+
+<script>
+    //Script que maneja el boton agregar deposito y verificar 
+    document.getElementById('check-deposito').addEventListener('click', function () {
+    const clienteId = document.getElementById('cliente_id_cliente').value;
+    const messageDiv = document.getElementById('deposito-message');
+
+    if (!clienteId) {
+        messageDiv.innerHTML = '<div class="alert alert-danger">Seleccione un cliente.</div>';
+        return;
+    }
+
+    fetch(`/check-deposito`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+        },
+        body: JSON.stringify({ cliente_id_cliente: clienteId }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            if (data.success) {
+                messageDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
+            } else {
+                messageDiv.innerHTML = `
+                    <div class="alert alert-warning">
+                        ${data.message}
+                        <a href="${data.redirectUrl}" class="btn btn-sm btn-warning mt-2">Agregar Depósito</a>
+                    </div>
+                `;
+            }
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+            messageDiv.innerHTML = '<div class="alert alert-danger">Error al verificar el depósito.</div>';
+        });
+});
+</script>

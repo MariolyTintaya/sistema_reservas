@@ -7,7 +7,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReservaRequest;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use App\Models\Cliente;
+use App\Models\Deposito;
 
 class ReservaController extends Controller
 {
@@ -28,8 +31,43 @@ class ReservaController extends Controller
     public function create(): View
     {
         $reserva = new Reserva();
+        $ultimoId = Reserva::latest('id_reserva')->first(); // Obtén la última reserva
+        
+        // Si existe alguna reserva, obtén el id_reserva
+        $ultimoId = $ultimoId ? $ultimoId->id_reserva : 0; // Puedes asignar 0 si no hay reservas
+        $clientes = \App\Models\Cliente::all(); // Obtiene todos los clientes
+    
+        // Obtener el usuario autenticado
+        $usuarioAutenticado = Auth::user();
+        
+        // Pasar los datos como un array asociativo
+        return view('reserva.create', [
+            'reserva' => $reserva,
+            'ultimoId' => $ultimoId,
+            'clientes' => $clientes,
+            'usuarioAutenticado' => $usuarioAutenticado,
+        ]);
+    }
+    //MI PRIMER QUERY uwu no tocar 
+    public function checkDeposito(Request $request)
+    {
+        $clienteId = $request->input('cliente_id_cliente');
 
-        return view('reserva.create', compact('reserva'));
+        // Verificar si el cliente ha hecho un depósito
+        $deposito = Deposito::where('cliente_id_cliente', $clienteId)->first();
+
+        if ($deposito) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Este cliente ya tiene un depósito registrado.',
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Este cliente no tiene un depósito registrado.',
+                'redirectUrl' => route('depositos.create'),
+            ]);
+        }
     }
 
     /**
@@ -38,11 +76,24 @@ class ReservaController extends Controller
     public function store(ReservaRequest $request): RedirectResponse
     {
         Reserva::create($request->validated());
-
+        $data = $request->validated();
+        $data['fecha_creacion'] = date('Y-m-d'); // Forzar la fecha actual
+     
+        Reserva::create($data);
+        $validatedData['usuario_id_usuario'] = Auth::id();    // Agregar el ID del usuario autenticado al registro
+        // Crear la reserva
+        Reserva::create($validatedData);
         return Redirect::route('reservas.index')
-            ->with('success', 'Reserva created successfully.');
+            ->with('success', 'Reserva creada exitosamente.');
     }
 
+    public function rules(): array
+    {
+    return [
+        'fecha_creacion' => 'required|date|before_or_equal:today',
+        // Otras reglas
+    ];
+    }
     /**
      * Display the specified resource.
      */
@@ -58,9 +109,10 @@ class ReservaController extends Controller
      */
     public function edit($id_reserva): View
     {
-        $reserva = Reserva::find($id_reserva);
-
-        return view('reserva.edit', compact('reserva'));
+        $reserva = Reserva::findOrFail($id_reserva);
+        $clientes = \App\Models\Cliente::all();
+    
+        return view('reserva.edit', compact('reserva', 'clientes'));
     }
 
     /**
