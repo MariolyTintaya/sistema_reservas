@@ -12,7 +12,7 @@
     <h1 class="text-center mt-5">Datos del Vendedor</h1>
     
     <form action="{{ route('vendedores.store') }}" method="POST" class="form-group">
-     
+     @csrf
         <!-- Usuario ID -->
         <div class="form-group">
             <label for="usuario_id_usuario">Usuario:</label>

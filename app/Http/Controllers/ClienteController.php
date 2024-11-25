@@ -27,15 +27,14 @@ class ClienteController extends Controller
      */
     public function create(): View
     {
+       // Crear una nueva instancia del cliente
+         $cliente = new Cliente();
         // Obtener el último ID de cliente y calcular el siguiente
-        $lastClienteId = Cliente::max('id_cliente');
-        $nextClienteId = $lastClienteId ? $lastClienteId + 1 : 1;
-
-        // Crear una nueva instancia del cliente
-        $cliente = new Cliente();
-
+        $ultimoId = Cliente::latest('id_cliente')->first(); // Obtén al ultimo cliente
+        // Si existe alguna cliente, obtén el cleinte
+        $ultimoId = $ultimoId ? $ultimoId->id_cliente : 0;
         // Pasar el siguiente ID a la vista
-        return view('cliente.create', compact('cliente', 'nextClienteId'));
+        return view('cliente.create', compact('cliente', 'ultimoId'));
     }
 
 
@@ -47,7 +46,7 @@ class ClienteController extends Controller
         Cliente::create($request->validated());
 
         return Redirect::route('clientes.index')
-            ->with('success', 'Cliente created successfully.');
+            ->with('success', 'Cliente agregado con exito');
     }
 
     /**

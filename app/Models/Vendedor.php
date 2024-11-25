@@ -24,7 +24,7 @@ class Vendedor extends Model
         'activo',
         'usuario_id_usuario'
     ];
-
+    public $timestamps = false;
     // Relación con el modelo de Usuario (suponiendo que hay un modelo 'Usuario')
     public function usuario()
     {

@@ -74,7 +74,7 @@
             {!! $errors->first('activo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
-            <label for="tour_id_tour" class="form-label">{{ __('Tour') }}</label>
+            <label for="tour_id_tour" class="form-label">{{ __(' Nombre de Tour') }}</label>
             <select name="tour_id_tour" class="form-control @error('tour_id_tour') is-invalid @enderror" id="tour_id_tour">
                 <option value="">Seleccione un tour</option>
                 @foreach ($tours as $tour)
