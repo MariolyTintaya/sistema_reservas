@@ -49,5 +49,9 @@ class Cliente extends Model
     {
         return $this->belongsTo(\App\Models\TipoCliente::class, 'tipo_cliente_id_tipo', 'id_tipo');
     }
+    public function depositos()
+    {
+    return $this->hasMany(Deposito::class, 'cliente_id_cliente', 'id_cliente');
+    }   
     
 }

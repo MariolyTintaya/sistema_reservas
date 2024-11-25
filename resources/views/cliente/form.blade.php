@@ -5,10 +5,25 @@
             <!-- Aquí se usa $cliente->id_cliente en lugar de $nextClienteId -->
             <input type="text" name="id_cliente" 
                 class="form-control @error('id_cliente') is-invalid @enderror" 
-                value="{{ old('id_cliente', $cliente->id_cliente) }}" 
+                value="{{ old('id_cliente', $ultimoId + 1) }}"
                 id="id_cliente" 
                 readonly>
             {!! $errors->first('id_cliente', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+        <div class="form-group mb-2 mb20">
+            <label for="nombre" class="form-label">{{ __('Nombre') }}</label>
+            <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre', $cliente?->nombre) }}" id="nombre" placeholder="Nombre">
+            {!! $errors->first('nombre', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+        <div class="form-group mb-2 mb20">
+            <label for="ape_paterno" class="form-label">{{ __('Apellido Paterno') }}</label>
+            <input type="text" name="ape_paterno" class="form-control @error('ape_paterno') is-invalid @enderror" value="{{ old('ape_paterno', $cliente?->ape_paterno) }}" id="ape_paterno" placeholder="Apellido Paterno">
+            {!! $errors->first('ape_paterno', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+        <div class="form-group mb-2 mb20">
+            <label for="ape_materno" class="form-label">{{ __('Apellido Materno') }}</label>
+            <input type="text" name="ape_materno" class="form-control @error('ape_materno') is-invalid @enderror" value="{{ old('ape_materno', $cliente?->ape_materno) }}" id="ape_materno" placeholder="Apellido Materno">
+            {!! $errors->first('ape_materno', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
             <label for="nro_documento" class="form-label">{{ __('CI') }}</label>
@@ -19,21 +34,6 @@
             <label for="celular" class="form-label">{{ __('Numero de Celular') }}</label>
             <input type="number" name="celular" class="form-control @error('celular') is-invalid @enderror" value="{{ old('celular', $cliente?->celular) }}" id="celular" placeholder="Celular">
             {!! $errors->first('celular', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="nombre" class="form-label">{{ __('Nombre') }}</label>
-            <input type="text" name="nombre" class="form-control @error('nombre') is-invalid @enderror" value="{{ old('nombre', $cliente?->nombre) }}" id="nombre" placeholder="Nombre">
-            {!! $errors->first('nombre', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="ape_paterno" class="form-label">{{ __('Apellido Paterno') }}</label>
-            <input type="text" name="ape_paterno" class="form-control @error('ape_paterno') is-invalid @enderror" value="{{ old('ape_paterno', $cliente?->ape_paterno) }}" id="ape_paterno" placeholder="Ape Paterno">
-            {!! $errors->first('ape_paterno', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-        <div class="form-group mb-2 mb20">
-            <label for="ape_materno" class="form-label">{{ __('Apellido Materno') }}</label>
-            <input type="text" name="ape_materno" class="form-control @error('ape_materno') is-invalid @enderror" value="{{ old('ape_materno', $cliente?->ape_materno) }}" id="ape_materno" placeholder="Ape Materno">
-            {!! $errors->first('ape_materno', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
         <div class="form-group mb-2 mb20">
             <label for="fecha_nac" class="form-label">{{ __('Fecha de Nacimiento') }}</label>
@@ -47,16 +47,8 @@
             {!! $errors->first('fecha_nac', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
 
-        <div class="form-group mb-2 mb20">
-            <label for="activo" class="form-label">{{ __('Activo') }}</label>
-            <input type="text" name="activo" 
-                class="form-control @error('activo') is-invalid @enderror" 
-                value="{{ old('activo', $cliente?->activo ?? 1) }}" 
-                id="activo" 
-                placeholder="Activo" 
-                readonly>
-            {!! $errors->first('activo', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
+        <input type="hidden" name="activo" value="1">
+
         <div class="form-group mb-2 mb20">
             <label for="tipo_cliente_id_tipo" class="form-label">{{ __('Tipo Cliente') }}</label>
             <select name="tipo_cliente_id_tipo" id="tipo_cliente_id_tipo" class="form-control @error('tipo_cliente_id_tipo') is-invalid @enderror">

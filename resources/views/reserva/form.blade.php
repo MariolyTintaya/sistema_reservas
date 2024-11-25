@@ -10,18 +10,25 @@
            <!-- Campo Nombre del Cliente -->
            <div class="form-group mb-2 mb20">
             <label for="cliente_id_cliente" class="form-label">{{ __('Seleccione Cliente') }}</label>
-             <select name="cliente_id_cliente" id="cliente_id_cliente" class="form-control">
+            <select name="cliente_id_cliente" id="cliente_id_cliente" 
+                    class="form-control @error('cliente_id_cliente') is-invalid @enderror">
                 <option value="">Seleccione un cliente</option>
                 @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->id_cliente }}">
-                        {{ $cliente->nombre }} {{ $cliente->ape_paterno}} {{ $cliente->ape_materno}}
+                    <option value="{{ $cliente->id_cliente }}" 
+                        {{ old('cliente_id_cliente') == $cliente->id_cliente ? 'selected' : '' }}>
+                        {{ $cliente->nombre }} {{ $cliente->ape_paterno }} {{ $cliente->ape_materno }}
                     </option>
                 @endforeach
-             </select>
-           </div>
-           <div class="form-group mb-2 mb20">
+            </select>
+
+            
+            @error('cliente_id_cliente')
+                <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="form-group mb-2 mb20">
             <button type="button" id="check-deposito" class="btn btn-primary">Verificar Depósito</button>
-           </div>
+        </div>
         
         <div id="deposito-message" class="mt-2"></div>
         <!-- Campo Numero de Personas -->
@@ -33,9 +40,8 @@
                    value="{{ old('num_personas', $reserva?->num_personas ?? 1) }}" 
                    id="num_personas" 
                    placeholder="Num Personas" 
-                   min="1" 
                    step="1">
-            {!! $errors->first('num_personas', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+                   {!! $errors->first('num_personas', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div> 
          <!-- Campo Fecha de Creacion -->
          <div class="form-group mb-2 mb20">
@@ -47,25 +53,33 @@
                    id="fecha_creacion" 
                    placeholder="Fecha Creacion" 
                    readonly>
-            {!! $errors->first('fecha_creacion', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+            {!! $errors->first('fecha_creacion', '<div class=lert"><"invalid-feedback" role="astrong>:message</strong></div>') !!}
         </div>
           <!-- Campo Oculto Activo (Se llenara 1 por defecto) -->
         <input type="hidden" name="activo" value="1">
-        <div class="form-group mb-2 mb20">
-            <label for="tour_id_tour" class="form-label">{{ __('Tour Id Tour') }}</label>
-            <input type="text" name="tour_id_tour" class="form-control @error('tour_id_tour') is-invalid @enderror" value="{{ old('tour_id_tour', $reserva?->tour_id_tour) }}" id="tour_id_tour" placeholder="Tour Id Tour">
-            {!! $errors->first('tour_id_tour', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-        </div>
-              <!-- Campo Deposito se guardara automaticamente el id -->
+
+       <!-- Campo Tour -->
+       <div class="form-group mb-2 mb20">
+        <label for="tour_id_tour" class="form-label">{{ __('Tour') }}</label>
+        <select name="tour_id_tour" class="form-control @error('tour_id_tour') is-invalid @enderror" id="tour_id_tour">
+            @foreach ($tours as $tour)
+                <option value="{{ $tour->id_tour }}" {{ old('tour_id_tour') == $tour->id_tour ? 'selected' : '' }}>
+                    {{ $tour->id_tour }}
+                </option>
+            @endforeach
+        </select>
+        {!! $errors->first('tour_id_tour', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+    </div>
+        <!-- Campo Deposito se guardara automaticamente el id -->
               
-        <!-- Campo Vendedor Aun falta arreglar  -->
+        <!-- Campo Vendedor -->
         <div class="form-group mb-2 mb20">
             <label for="usuario_id_usuario" class="form-label">{{ __('Usuario') }}</label>
             <input 
                 type="text" 
                 name="usuario_id_usuario" 
                 class="form-control @error('usuario_id_usuario') is-invalid @enderror" 
-                value="{{ old('usuario_id_usuario', $usuarioAutenticado->name ?? '') }}" 
+                value="{{ old('usuario_id_usuario', ($usuarioAutenticado->nombre ?? '') . ' ' . ($usuarioAutenticado->apellido ?? '')) }}" 
                 id="usuario_id_usuario" 
                 placeholder="Nombre del Usuario" 
                 readonly>

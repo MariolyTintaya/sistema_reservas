@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use App\Models\Cliente;
 use App\Models\Deposito;
+use App\Models\Tour;
 
 class ReservaController extends Controller
 {
@@ -36,15 +37,16 @@ class ReservaController extends Controller
         // Si existe alguna reserva, obtén el id_reserva
         $ultimoId = $ultimoId ? $ultimoId->id_reserva : 0; // Puedes asignar 0 si no hay reservas
         $clientes = \App\Models\Cliente::all(); // Obtiene todos los clientes
-    
+
         // Obtener el usuario autenticado
         $usuarioAutenticado = Auth::user();
-        
+        $tours = Tour::all(); 
         // Pasar los datos como un array asociativo
         return view('reserva.create', [
             'reserva' => $reserva,
             'ultimoId' => $ultimoId,
             'clientes' => $clientes,
+            'tours'=>  $tours,
             'usuarioAutenticado' => $usuarioAutenticado,
         ]);
     }
@@ -73,27 +75,49 @@ class ReservaController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ReservaRequest $request): RedirectResponse
-    {
-        Reserva::create($request->validated());
-        $data = $request->validated();
-        $data['fecha_creacion'] = date('Y-m-d'); // Forzar la fecha actual
-     
-        Reserva::create($data);
-        $validatedData['usuario_id_usuario'] = Auth::id();    // Agregar el ID del usuario autenticado al registro
-        // Crear la reserva
-        Reserva::create($validatedData);
-        return Redirect::route('reservas.index')
-            ->with('success', 'Reserva creada exitosamente.');
-    }
+    public function store(Request $request)
+        {
+            // Validar los datos del formulario
+            $validatedData = $request->validate([
+                'id_reserva' => 'required|integer|min:1',
+                'cliente_id_cliente' => 'required|exists:cliente,id_cliente',
+                'num_personas' => 'required|min:1|integer',
+                'fecha_creacion' => 'required|date',
+                'tour_id_tour' => 'required|exists:tour,id_tour',
+            ], [
+                'id_reserva.required' => 'El ID de la reserva es obligatorio.',
+                'id_reserva.integer' => 'El ID de la reserva debe ser un número entero.',
+                'id_reserva.min' => 'El ID de la reserva debe ser al menos 1.',
+                
+                'cliente_id_cliente.required' => 'Debe seleccionar un cliente.',
+                'cliente_id_cliente.exists' => 'El cliente seleccionado no existe en el sistema.',
 
-    public function rules(): array
-    {
-    return [
-        'fecha_creacion' => 'required|date|before_or_equal:today',
-        // Otras reglas
-    ];
-    }
+                'num_personas.integer' => 'El número de personas debe ser un número entero.',
+                'num_personas.min' => 'Debe haber al menos 1 persona en la reserva.',
+
+                'fecha_creacion.required' => 'La fecha de creación es obligatoria.',
+                'fecha_creacion.date' => 'La fecha de creación debe ser válida.',
+                'tour_id_tour.required' => 'Debe seleccionar un tour.'
+            ]);
+
+            // Obtener el cliente asociado
+            $cliente = \App\Models\Cliente::find($request->cliente_id_cliente);
+
+            // Verificar si el cliente tiene un depósito
+            $deposito = $cliente->depositos()->first(); // Si existe, obtendrás el primer depósito
+
+            // Si el cliente tiene un depósito, asignar el id_deposito, de lo contrario, asignar null
+            $validatedData['deposito_id_deposito'] = $deposito ? $deposito->id_deposito : null;
+
+            // Agregar el ID del usuario autenticado al registro
+            $validatedData['usuario_id_usuario'] = Auth::id();
+
+            // Crear la nueva reserva con los datos validados
+            Reserva::create($validatedData);
+
+            // Redirigir con un mensaje de éxito
+            return redirect()->route('reservas.index')->with('success', 'Reserva creada con éxito.');
+        }
     /**
      * Display the specified resource.
      */
@@ -123,7 +147,7 @@ class ReservaController extends Controller
         $reserva->update($request->validated());
 
         return Redirect::route('reservas.index')
-            ->with('success', 'Reserva updated successfully');
+            ->with('success', 'Reserva actualizada exitosamente');
     }
 
     public function destroy($id_reserva): RedirectResponse
@@ -131,6 +155,6 @@ class ReservaController extends Controller
         Reserva::find($id_reserva)->delete();
 
         return Redirect::route('reservas.index')
-            ->with('success', 'Reserva deleted successfully');
+            ->with('success', 'Reserva Eliminada exkitosamente');
     }
 }

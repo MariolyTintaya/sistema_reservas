@@ -30,7 +30,7 @@ class VendedorController extends Controller
             'turno' => 'nullable|string|max:25',
             'celular' => 'nullable|integer',
             'activo' => 'required|boolean',
-            'usuario_id_usuario' => 'required|integer|exists:usuarios,id_usuario'
+            'usuario_id_usuario' => 'required|integer|exists:usuario,id_usuario'
         ]);
 
         Vendedor::create($request->all());
@@ -40,7 +40,7 @@ class VendedorController extends Controller
     // Mostrar el vendedor específico
     public function show(Vendedor $vendedor)
     {
-        return view('vendedores.show', compact('vendedor'));
+        return view('vendedores.index', compact('vendedor'));
     }
 
     // Mostrar el formulario para editar un vendedor existente
