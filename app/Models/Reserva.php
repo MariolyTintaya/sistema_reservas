@@ -51,7 +51,7 @@ class Reserva extends Model
         'deposito_id_deposito',
         'usuario_id_usuario'
     ];
-
+    
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
@@ -83,5 +83,14 @@ class Reserva extends Model
     {
         return $this->belongsTo(\App\Models\Usuario::class, 'usuario_id_usuario', 'id_usuario');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function transporte()
+    {
+        return $this->belongsTo(\App\Models\Transporte::class, 'transporte_id', 'id_transporte');
+    }
+
 }
 

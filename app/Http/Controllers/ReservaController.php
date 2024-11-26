@@ -20,11 +20,20 @@ class ReservaController extends Controller
      */
     public function index(Request $request): View
     {
-        $reservas = Reserva::paginate();
+        // Cargar las relaciones necesarias
+        $reservas = Reserva::with(['cliente', 'tour', 'transporte'])->paginate();
 
-        return view('reserva.index', compact('reservas'))
+        // Verificar si no hay reservas
+        if ($reservas->isEmpty()) {
+            // Puedes redirigir con un mensaje si no hay reservas, o pasar un error a la vista
+            return view('dashboard', compact('reservas'))->with('error', 'No hay reservas disponibles.');
+        }
+
+        // Si hay reservas, pasar la variable a la vista
+        return view('dashboard', compact('reservas'))
             ->with('i', ($request->input('page', 1) - 1) * $reservas->perPage());
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -84,6 +93,7 @@ class ReservaController extends Controller
                 'num_personas' => 'required|min:1|integer',
                 'fecha_creacion' => 'required|date',
                 'tour_id_tour' => 'required|exists:tour,id_tour',
+                'transporte_id' => 'required|exists:transporte,id_transporte', // Validar transporte
             ], [
                 'id_reserva.required' => 'El ID de la reserva es obligatorio.',
                 'id_reserva.integer' => 'El ID de la reserva debe ser un número entero.',
@@ -97,7 +107,9 @@ class ReservaController extends Controller
 
                 'fecha_creacion.required' => 'La fecha de creación es obligatoria.',
                 'fecha_creacion.date' => 'La fecha de creación debe ser válida.',
-                'tour_id_tour.required' => 'Debe seleccionar un tour.'
+                'tour_id_tour.required' => 'Debe seleccionar un tour.',
+                'transporte_id.required' => 'El tipo de transporte es obligatorio.',
+                'transporte_id.exists' => 'El transporte seleccionado no existe.'
             ]);
 
             // Obtener el cliente asociado

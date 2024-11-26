@@ -40,7 +40,7 @@ class ParadaController extends Controller
         Parada::create($request->validated());
 
         return Redirect::route('paradas.index')
-            ->with('success', 'Parada created successfully.');
+            ->with('success', 'Parada creada exitosamente');
     }
 
     /**
@@ -71,7 +71,7 @@ class ParadaController extends Controller
         $parada->update($request->validated());
 
         return Redirect::route('paradas.index')
-            ->with('success', 'Parada updated successfully');
+            ->with('success', 'Parada actualizada exitosamente');
     }
 
     public function destroy($id_parada): RedirectResponse
@@ -79,6 +79,6 @@ class ParadaController extends Controller
         Parada::find($id)->delete();
 
         return Redirect::route('paradas.index')
-            ->with('success', 'Parada deleted successfully');
+            ->with('success', 'Parada eliminada exitosamente');
     }
 }

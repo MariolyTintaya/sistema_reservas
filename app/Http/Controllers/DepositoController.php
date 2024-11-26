@@ -40,7 +40,7 @@ class DepositoController extends Controller
         Deposito::create($request->validated());
 
         return Redirect::route('depositos.index')
-            ->with('success', 'Deposito created successfully.');
+            ->with('success', 'Deposito creado exitosamente');
     }
 
     /**
@@ -71,7 +71,7 @@ class DepositoController extends Controller
         $deposito->update($request->validated());
 
         return Redirect::route('depositos.index')
-            ->with('success', 'Deposito updated successfully');
+            ->with('success', 'Deposito actualizado exitosamente');
     }
 
     public function destroy($id): RedirectResponse
@@ -79,6 +79,6 @@ class DepositoController extends Controller
         Deposito::find($id)->delete();
 
         return Redirect::route('depositos.index')
-            ->with('success', 'Deposito deleted successfully');
+            ->with('success', 'Deposito eliminado exitosamente');
     }
 }
