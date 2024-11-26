@@ -40,7 +40,7 @@ class TourController extends Controller
         Tour::create($request->validated());
 
         return Redirect::route('tours.index')
-            ->with('success', 'Tour created successfully.');
+            ->with('success', 'Tour creado exitosamente');
     }
 
     /**
@@ -71,7 +71,7 @@ class TourController extends Controller
         $tour->update($request->validated());
 
         return Redirect::route('tours.index')
-            ->with('success', 'Tour updated successfully');
+            ->with('success', 'Tour actualizado exitosamente');
     }
 
     public function destroy($id): RedirectResponse
@@ -79,6 +79,6 @@ class TourController extends Controller
         Tour::find($id)->delete();
 
         return Redirect::route('tours.index')
-            ->with('success', 'Tour deleted successfully');
+            ->with('success', 'Tour eliminado exitosamente');
     }
 }

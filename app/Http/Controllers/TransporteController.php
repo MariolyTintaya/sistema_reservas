@@ -41,7 +41,7 @@ class TransporteController extends Controller
         Transporte::create($request->validated());
 
         return Redirect::route('transportes.index')
-            ->with('success', 'Transporte created successfully.');
+            ->with('success', 'Transporte creado exitosamente');
     }
 
     /**
@@ -52,7 +52,7 @@ class TransporteController extends Controller
         $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
-            return Redirect::route('transportes.index')->with('error', 'Transporte not found.');
+            return Redirect::route('transportes.index')->with('error', 'Transporte no encontrado');
         }
 
         return view('transporte.show', compact('transporte'));
@@ -66,7 +66,7 @@ class TransporteController extends Controller
         $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
-            return Redirect::route('transportes.index')->with('error', 'Transporte not found.');
+            return Redirect::route('transportes.index')->with('error', 'Transporte no encontrado');
         }
 
         return view('transporte.edit', compact('transporte'));
@@ -80,13 +80,13 @@ class TransporteController extends Controller
         $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
-            return Redirect::route('transportes.index')->with('error', 'Transporte not found.');
+            return Redirect::route('transportes.index')->with('error', 'Transporte no encontrado');
         }
 
         $transporte->update($request->validated());
 
         return Redirect::route('transportes.index')
-            ->with('success', 'Transporte updated successfully');
+            ->with('success', 'Transporte actualizado exitosamente');
     }
 
     /**
@@ -97,16 +97,16 @@ class TransporteController extends Controller
         $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
-            return Redirect::route('transportes.index')->with('error', 'Transporte not found.');
+            return Redirect::route('transportes.index')->with('error', 'Transporte no encontrado');
         }
 
         try {
             $transporte->delete();
             return Redirect::route('transportes.index')
-                ->with('success', 'Transporte deleted successfully');
+                ->with('success', 'Transporte eliminaod exitosamente');
         } catch (QueryException $e) {
             return Redirect::route('transportes.index')
-                ->with('error', 'Cannot delete Transporte: it has associated records in other tables.');
+                ->with('error', 'No se puede eliminar este transporte');
         }
     }
 }

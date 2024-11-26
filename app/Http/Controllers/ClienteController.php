@@ -88,7 +88,7 @@ class ClienteController extends Controller
         $cliente->update($request->validated());
 
         return Redirect::route('clientes.index')
-            ->with('success', 'Cliente updated successfully');
+            ->with('success', 'Cliente actualizado exitosamente');
     }
 
     public function destroy($id_cliente): RedirectResponse
@@ -96,6 +96,6 @@ class ClienteController extends Controller
         Cliente::find($id_cliente)->delete();
 
         return Redirect::route('clientes.index')
-            ->with('success', 'Cliente deleted successfully');
+            ->with('success', 'Cliente eliminado exitosamente');
     }
 }
