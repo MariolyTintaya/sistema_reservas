@@ -55,12 +55,10 @@
         <div class="relative group">
           <a href="#paquetes" class="hover:text-purple-600">Paquetes</a>
           <div class="absolute hidden group-hover:block bg-white shadow-md py-2 rounded w-40">
-            <a href="#paquete1" class="block px-4 py-2 hover:bg-purple-50">paquete1</a>
-            <a href="#paquete2" class="block px-4 py-2 hover:bg-purple-50">paquete2</a>
-            <a href="#paquete3" class="block px-4 py-2 hover:bg-purple-50">paquete3</a>
-            <a href="#paquete4" class="block px-4 py-2 hover:bg-purple-50">paquete4</a>
-            <a href="#paquete5" class="block px-4 py-2 hover:bg-purple-50">paquete5</a>
-            <a href="#paquete6" class="block px-4 py-2 hover:bg-purple-50">paquete6</a>
+            <a href="#paquete1" class="block px-4 py-2 hover:bg-purple-50">FullDay</a>
+            <a href="#paquete2" class="block px-4 py-2 hover:bg-purple-50">DivSummer</a>
+            <a href="#paquete3" class="block px-4 py-2 hover:bg-purple-50">Diverano</a>
+            
           </div>
         </div>
         <a href="{{ route('login') }}" class="hover:text-purple-600">
@@ -141,6 +139,22 @@
     </div>
   </section>
   
+ <!-- Sección del mapa -->
+ <section id="Nuestra Ubicacion" class="container mx-auto px-4 py-12">
+  <h2 class="text-3xl font-bold text-center mb-8">Nuestra Ubicación</h2>
+  <div class="flex justify-center">
+      <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3827.7005930639864!2d-68.1351377!3d-16.5004973!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x915edf1836a739e3%3A0x89e1878a740cba0e!2sPasteleria%20Calaya%2C%20FVX7%2BQWX%2C%20Almirante%20Grau%2C%20La%20Paz%20Bolivia!5e0!3m2!1ses!2sbo!4v1697235474957!5m2!1ses!2sbo"
+          width="600"
+          height="450"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="shadow-lg rounded-lg"
+      ></iframe>
+  </div>
+</section>
 
   <!-- Pie de Página -->
   <footer class="bg-purple-600 text-white py-8">
@@ -158,14 +172,38 @@
   <script>
     // Función para generar dinámicamente las tarjetas de paquetes
     function generatePackageCards() {
-      const paquetes = [
-        { titulo: 'Paquete 1', descripcion: 'descripcion del tour paquete 1.', imagen: '{{ asset("images/Packages/Copacabana.jpeg") }}'},
-        { titulo: 'Paquete 2', descripcion: 'descripcion del tour paquete 2.', imagen: '{{ asset("images/Packages/Hotel_Dos_Rios.jpeg") }}' },
-        { titulo: 'Paquete 3', descripcion: 'descripcion del tour paquete 3.', imagen: '{{ asset("images/Packages/Leque.jpeg") }}' },
-        { titulo: 'Paquete 4', descripcion: 'descripcion del tour paquete 4.', imagen: '{{ asset("images/Packages/Machupichu.jpeg") }}' },
-        { titulo: 'Paquete 5', descripcion: 'descripcion del tour paquete 5.', imagen: '{{ asset("images/Packages/Safari_de_Abejas.jpeg") }}' },
-        { titulo: 'Paquete 6', descripcion: 'descripcion del tour paquete 6.', imagen: '{{ asset("images/Packages/Salar_Uyuni.jpeg") }}' },
-      ];
+  const paquetes = [
+    { 
+      titulo: 'Copacabana', 
+      descripcion: 'Disfruta de paisajes espectaculares y la tranquilidad del Lago Titicaca.', 
+      imagen: '{{ asset("images/Packages/Copacabana.jpeg") }}' 
+    },
+    { 
+      titulo: 'Hotel Dos Rios', 
+      descripcion: 'Relájate en un entorno acogedor rodeado de naturaleza y confort.', 
+      imagen: '{{ asset("images/Packages/Hotel_Dos_Rios.jpeg") }}' 
+    },
+    { 
+      titulo: 'Leque', 
+      descripcion: 'Explora la cultura ancestral en un entorno místico y vibrante.', 
+      imagen: '{{ asset("images/Packages/Leque.jpeg") }}' 
+    },
+    { 
+      titulo: 'Machupichu', 
+      descripcion: 'Descubre la majestuosidad de una de las maravillas del mundo.', 
+      imagen: '{{ asset("images/Packages/Machupichu.jpeg") }}' 
+    },
+    { 
+      titulo: 'Safari de Abejas', 
+      descripcion: 'Adéntrate en el fascinante mundo de la apicultura y la naturaleza.', 
+      imagen: '{{ asset("images/Packages/Safari_de_Abejas.jpeg") }}' 
+    },
+    { 
+      titulo: 'Salar de Uyuni', 
+      descripcion: 'Vive una experiencia única en el desierto de sal más grande del mundo.', 
+      imagen: '{{ asset("images/Packages/Salar_Uyuni.jpeg") }}' 
+    },
+  ];
 
       return paquetes.map(paquete => `
     <div class="bg-white rounded-lg shadow-md overflow-hidden transform hover:scale-105 transition">

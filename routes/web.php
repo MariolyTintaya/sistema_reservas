@@ -53,11 +53,11 @@ Route::resource('vendedores', VendedorController::class);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('tours', TourController::class);
+Route::resource('tour', TourController::class);
 Route::resource('destinos', DestinoController::class);
-Route::resource('guia', GuiumController::class);
-Route::resource('paquetes', PaqueteController::class);
-Route::resource('transportes', TransporteController::class);
+Route::resource('guium', GuiumController::class);
+Route::resource('paquete', PaqueteController::class);
+Route::resource('transporte', TransporteController::class);
 Route::resource('clientes', ClienteController::class);
 Route::resource('depositos', DepositoController::class);
 Route::resource('reservas', ReservaController::class);

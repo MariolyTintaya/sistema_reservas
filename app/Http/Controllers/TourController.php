@@ -39,7 +39,7 @@ class TourController extends Controller
     {
         Tour::create($request->validated());
 
-        return Redirect::route('tours.index')
+        return Redirect::route('tour.index')
             ->with('success', 'Tour creado exitosamente');
     }
 
@@ -70,7 +70,7 @@ class TourController extends Controller
     {
         $tour->update($request->validated());
 
-        return Redirect::route('tours.index')
+        return Redirect::route('tour.index')
             ->with('success', 'Tour actualizado exitosamente');
     }
 
@@ -78,7 +78,7 @@ class TourController extends Controller
     {
         Tour::find($id)->delete();
 
-        return Redirect::route('tours.index')
+        return Redirect::route('tour.index')
             ->with('success', 'Tour eliminado exitosamente');
     }
 }

@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Parada</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
+@extends('layouts.panelGerente')
 
-<body class="bg-gray-100 flex flex-col">
+@section('title', 'Crear Parada')
+
+@section('content')
     <section class="content container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -29,4 +23,4 @@
             </div>
         </div>
     </section>
-</body>
+@endsection

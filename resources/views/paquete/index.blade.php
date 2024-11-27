@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Paquetes</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
+@extends('layouts.panelGerente')
 
-<body class="bg-gray-100 flex flex-col">
+@section('title', 'Paquetes')
+
+@section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -21,7 +15,7 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('paquetes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('paquete.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Nuevo Paquete') }}
                                 </a>
                               </div>
@@ -50,23 +44,25 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($paquetes as $paquete)
+                                @foreach ($paquete as $item)
                                     <tr>
                                         <td>{{ ++$i }}</td>
-                                        <td>{{ $paquete->temporada }}</td>
-                                        <td>{{ $paquete->tipo_paquete }}</td>
-                                        <td>{{ $paquete->precio }}</td>
-                                        <td>{{ $paquete->nombre }}</td>
-                                        <td>{{ $paquete->fechaInicio }}</td>
-                                        <td>{{ $paquete->fechaFin }}</td>
-                                        <td>{{ $paquete->tour->informe ?? 'Sin informe' }}</td>
+                                        <td>{{ $item->id_paquete }}</td>
+                                        <td>{{ $item->nombre }}</td>
+                                        <td>{{ $item->temporada }}</td>
+                                        <td>{{ $item->tipo_paquete}}</td>
+                                        <td>{{ $item->precio }}</td>
+                                        <td>{{ $item->fechaInicio }}</td>
+                                        <td>{{ $item->fechaFin}}</td>
+                                        <td>{{ $item->activo }}</td>
+                                        <td>{{ $item->tour_id_tour }}</td>
                                         <td>
-                                            <form action="{{ route('paquetes.destroy', $paquete->id_paquete) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary " href="{{ route('paquetes.show', $paquete->id_paquete) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
-                                                <a class="btn btn-sm btn-success" href="{{ route('paquetes.edit', $paquete->id_paquete) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
+                                            <form action="{{ route('paquete.destroy', $item->id_paquete) }}" method="POST">
+                                                <a class="btn btn-sm btn-primary " href="{{ route('paquete.show', $item->id_paquete) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
+                                                <a class="btn btn-sm btn-success" href="{{ route('paquete.edit', $item->id_paquete) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Borrar') }}</button>
                                             </form>
                                         </td>
                                     </tr>
@@ -76,8 +72,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $paquetes->withQueryString()->links() !!}
+                {!! $paquete->withQueryString()->links() !!}
             </div>
         </div>
     </div>
-</body>
+@endsection

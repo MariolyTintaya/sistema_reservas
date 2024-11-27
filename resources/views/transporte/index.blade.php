@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transporte</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
+@extends('layouts.panelGerente')
 
-<body class="bg-gray-100 flex flex-col">
+@section('title', 'Tours')
+
+@section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -21,7 +15,7 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('transportes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('transporte.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -49,20 +43,20 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($transportes as $transporte)
+                                    @foreach ($transporte as $transportes)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             
-										<td >{{ $transporte->num_placa }}</td>
-										<td >{{ $transporte->num_asientos }}</td>
-										<td >{{ $transporte->tipo_transporte }}</td>
-										<td >{{ $transporte->activo }}</td>
+										<td >{{ $transportes->num_placa }}</td>
+										<td >{{ $transportes->num_asientos }}</td>
+										<td >{{ $transportes->tipo_transporte }}</td>
+										<td >{{ $transportes->activo }}</td>
                                         <td>
-                                            <form action="{{ route('transportes.destroy', urlencode($transporte->num_placa)) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary" href="{{ route('transportes.show', urlencode($transporte->num_placa)) }}">
+                                            <form action="{{ route('transporte.destroy', urlencode($transportes->num_placa)) }}" method="POST">
+                                                <a class="btn btn-sm btn-primary" href="{{ route('transporte.show', urlencode($transportes->num_placa)) }}">
                                                     <i class="fa fa-fw fa-eye"></i> {{ __('Show') }}
                                                 </a>
-                                                <a class="btn btn-sm btn-success" href="{{ route('transportes.edit', urlencode($transporte->num_placa)) }}">
+                                                <a class="btn btn-sm btn-success" href="{{ route('transporte.edit', urlencode($transportes->num_placa)) }}">
                                                     <i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}
                                                 </a>
                                                 @csrf
@@ -79,8 +73,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $transportes->withQueryString()->links() !!}
+                {!! $transporte->withQueryString()->links() !!}
             </div>
         </div>
     </div>
-</body>
+@endsection

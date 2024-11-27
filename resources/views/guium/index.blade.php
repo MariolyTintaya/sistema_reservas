@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Guia</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
+@extends('layouts.panelGerente')
 
-<body class="bg-gray-100 flex flex-col">
+@section('title', 'Guias')
+
+@section('content')
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -21,7 +15,7 @@
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('guia.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                                <a href="{{ route('guium.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
                                   {{ __('Nuevo Guia') }}
                                 </a>
                               </div>
@@ -47,7 +41,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($guia as $guium)
+                                    @foreach ($guium as $guium)
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $guium->nombre }}</td>
@@ -55,11 +49,11 @@
                                             <td>{{ $guium->disponibilidad }}</td>
                                             <td>{{ $guium->tour->informe ?? 'Sin informe' }}</td>
                                             <td>
-                                                <form action="{{ route('guia.destroy', $guium->id_guia) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary" href="{{ route('guia.show', $guium->id_guia) }}">
+                                                <form action="{{ route('guium.destroy', $guium->id_guia) }}" method="POST">
+                                                    <a class="btn btn-sm btn-primary" href="{{ route('guium.show', $guium->id_guia) }}">
                                                         <i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}
                                                     </a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('guia.edit', $guium->id_guia) }}">
+                                                    <a class="btn btn-sm btn-success" href="{{ route('guium.edit', $guium->id_guia) }}">
                                                         <i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}
                                                     </a>
                                                     @csrf
@@ -76,9 +70,8 @@
                         </div>
                     </div>
                 </div>
-                {!! $guia->withQueryString()->links() !!}
+                {!! $guium->withQueryString()->links() !!}
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection
