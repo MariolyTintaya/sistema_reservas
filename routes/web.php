@@ -10,6 +10,8 @@ use App\Http\Controllers\DepositoController;
 use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\DestinoController;
 use App\Http\Controllers\ParadaController;
+use App\Http\Controllers\VendedorController;
+
 
 //------------------------ RUTAS MARIOLY  :3 --------------------------------
 Route::get('/', function () {
@@ -42,11 +44,6 @@ Route::get('/vendedores/dashboard', function () {
     return view('vendedores.dashboard'); // Redirige a la vista vendedor/dashboard.blade.php
 })->name('vendedor.dashboard')->middleware('auth'); // Asegúrate de que esté protegido por autenticación
 
-
-use App\Http\Controllers\VendedorController;
-
-Route::resource('vendedores', VendedorController::class);
-
 //--------------------------- FIN DE LAS RUTAS MARIOLY----------------------------
 
 //------------------------ RUTAS AILYN NO TOCAR :) --------------------------------
@@ -63,6 +60,8 @@ Route::resource('depositos', DepositoController::class);
 Route::resource('reservas', ReservaController::class);
 Route::post('/check-deposito', [ReservaController::class, 'checkDeposito'])->name('reserva.checkDeposito');
 Route::resource('paradas', ParadaController::class);
+Route::get('/vendedores/dashboard', [VendedorController::class, 'dashboard'])->name('vendedores.dashboard');
+
 //--------------------------- FIN DE LAS RUTAS AILYN :) ----------------------------
 
 

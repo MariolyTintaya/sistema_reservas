@@ -1,8 +1,7 @@
 <!-- resources/views/components/lista-reservas.blade.php -->
 
-@props(['reserva'])
+@props(['reservas'])
 
-<div class="flex-1 p-8 main-content">
     <!-- Lista de reservas -->
     <ul role="list" class="divide-y divide-gray-100 text-sm">
         @foreach ($reservas as $reserva)
@@ -33,4 +32,4 @@
             </li>
         @endforeach
     </ul>
-</div>
+

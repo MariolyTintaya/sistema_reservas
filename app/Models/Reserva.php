@@ -91,6 +91,13 @@ class Reserva extends Model
     {
         return $this->belongsTo(\App\Models\Transporte::class, 'transporte_id', 'id_transporte');
     }
+    public function dashboard()
+    {
+        // Obtener todas las reservas con relaciones
+        $reservas = Reserva::with(['cliente', 'tour', 'transporte']) // Ajusta 'transporte' si no aplica
+            ->paginate(10); // Para paginar las reservas
 
+        return view('vendedores.dashboard', compact('reservas'));
+    }
 }
 
