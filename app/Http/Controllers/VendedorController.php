@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+// Importa las clases necesarias
+use App\Models\Reserva;
 use App\Models\Vendedor;
 use Illuminate\Http\Request;
 use App\Models\Usuario;
@@ -73,4 +74,10 @@ class VendedorController extends Controller
         $vendedor->delete();
         return redirect()->route('vendedores.index');
     }
+    public function dashboard()
+    {
+        $reservas = \App\Models\Reserva::with(['cliente', 'tour', 'transporte'])->get();
+        return view('vendedores.dashboard', compact('reservas'));
+    }
+       
 }
