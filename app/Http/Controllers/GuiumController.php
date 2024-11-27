@@ -18,10 +18,10 @@ class GuiumController extends Controller
     public function index(Request $request): View
     {
         // Cargar la relación con 'tour' para cada guium
-        $guia = Guium::with('tour')->paginate();
+        $guium = Guium::with('tour')->paginate();
 
-        return view('guium.index', compact('guia'))
-            ->with('i', ($request->input('page', 1) - 1) * $guia->perPage());
+        return view('guium.index', compact('guium'))
+            ->with('i', ($request->input('page', 1) - 1) * $guium->perPage());
     }
 
     /**
@@ -61,7 +61,7 @@ class GuiumController extends Controller
         $guia->id_guia = $nextId;
         $guia->save();
 
-        return Redirect::route('guia.index')
+        return Redirect::route('guium.index')
             ->with('success', 'Guia creado exitosamente.');
     }
 
@@ -100,7 +100,7 @@ class GuiumController extends Controller
     {
         $guium->update($request->validated());
 
-        return Redirect::route('guia.index')
+        return Redirect::route('guium.index')
             ->with('success', 'Guia actualizado exitosamente.');
     }
 
@@ -111,7 +111,7 @@ class GuiumController extends Controller
     {
         Guium::find($id_guia)->delete();
 
-        return Redirect::route('guia.index')
+        return Redirect::route('guium.index')
             ->with('success', 'Guia eliminado exitosamente.');
     }
 }

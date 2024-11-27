@@ -1,13 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <title>Editar Vendedor</title>
-</head>
-<body>
+@extends('layouts.panelGerente')
+
+@section('title', 'Vendedores Edit')
+
+@section('content')
 
     <h1>Editar Vendedor</h1>    
     <form action="{{ route('vendedores.update', $vendedor) }}" method="POST" class="form-group">
@@ -59,6 +54,4 @@
         <!-- Botón de actualización -->
         <button type="submit" class="btn btn-success mt-3">Actualizar Vendedor</button>
     </form>
-
-</body>
-</html>
+@endsection

@@ -17,10 +17,10 @@ class TransporteController extends Controller
      */
     public function index(Request $request): View
     {
-        $transportes = Transporte::paginate();
+        $transporte = Transporte::paginate();
 
-        return view('transporte.index', compact('transportes'))
-            ->with('i', ($request->input('page', 1) - 1) * $transportes->perPage());
+        return view('transporte.index', compact('transporte'))
+            ->with('i', ($request->input('page', 1) - 1) * $transporte->perPage());
     }
 
     /**
@@ -40,7 +40,7 @@ class TransporteController extends Controller
     {
         Transporte::create($request->validated());
 
-        return Redirect::route('transportes.index')
+        return Redirect::route('transporte.index')
             ->with('success', 'Transporte creado exitosamente');
     }
 
@@ -52,7 +52,7 @@ class TransporteController extends Controller
         $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
-            return Redirect::route('transportes.index')->with('error', 'Transporte no encontrado');
+            return Redirect::route('transporte.index')->with('error', 'Transporte no encontrado');
         }
 
         return view('transporte.show', compact('transporte'));
@@ -66,7 +66,7 @@ class TransporteController extends Controller
         $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
-            return Redirect::route('transportes.index')->with('error', 'Transporte no encontrado');
+            return Redirect::route('transporte.index')->with('error', 'Transporte no encontrado');
         }
 
         return view('transporte.edit', compact('transporte'));
@@ -80,12 +80,12 @@ class TransporteController extends Controller
         $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
-            return Redirect::route('transportes.index')->with('error', 'Transporte no encontrado');
+            return Redirect::route('transporte.index')->with('error', 'Transporte no encontrado');
         }
 
         $transporte->update($request->validated());
 
-        return Redirect::route('transportes.index')
+        return Redirect::route('transporte.index')
             ->with('success', 'Transporte actualizado exitosamente');
     }
 
@@ -97,15 +97,15 @@ class TransporteController extends Controller
         $transporte = Transporte::find(urldecode($num_placa));
 
         if (!$transporte) {
-            return Redirect::route('transportes.index')->with('error', 'Transporte no encontrado');
+            return Redirect::route('transporte.index')->with('error', 'Transporte no encontrado');
         }
 
         try {
             $transporte->delete();
-            return Redirect::route('transportes.index')
+            return Redirect::route('transporte.index')
                 ->with('success', 'Transporte eliminaod exitosamente');
         } catch (QueryException $e) {
-            return Redirect::route('transportes.index')
+            return Redirect::route('transporte.index')
                 ->with('error', 'No se puede eliminar este transporte');
         }
     }

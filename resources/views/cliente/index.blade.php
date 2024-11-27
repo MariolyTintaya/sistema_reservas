@@ -1,14 +1,11 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cliente</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
+@extends('layouts.panelGerente')
 
-<body class="bg-gray-100 flex flex-col">
+@section('title', 'CrearCliente')
+
+@section('content')
+    <h1 class="mb-4">Bienvenido Gerente</h1>
+    <p>Aquí puedes ver la lista de Clientes.</p>
+    <!--INICIO DE LA LISTA DE CLIENTES --->
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
@@ -20,11 +17,6 @@
                                 {{ __('Clientes') }}
                             </span>
 
-                             <div class="float-right">
-                                <a href="{{ route('clientes.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Nuevo Cliente') }}
-                                </a>
-                              </div>
                         </div>
                     </div>
                     @if ($message = Session::get('success'))
@@ -90,5 +82,9 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+@endsection
+
+
+
+   
+

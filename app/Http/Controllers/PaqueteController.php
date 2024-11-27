@@ -17,10 +17,10 @@ class PaqueteController extends Controller
      */
     public function index(Request $request): View
     {
-        $paquetes = Paquete::paginate();
-
-        return view('paquete.index', compact('paquetes'))
-            ->with('i', ($request->input('page', 1) - 1) * $paquetes->perPage());
+        $paquete = Paquete::paginate();
+    
+        return view('paquete.index', compact('paquete'))
+            ->with('i', ($request->input('page', 1) - 1) * $paquete->perPage());
     }
 
     /**
@@ -65,7 +65,7 @@ class PaqueteController extends Controller
         // Crear el paquete con el tipo de paquete correcto
         Paquete::create(array_merge($request->validated(), ['tipo_paquete' => $tipoPaquete]));
 
-        return Redirect::route('paquetes.index')
+        return Redirect::route('paquete.index')
             ->with('success', 'Paquete creado exitosamente.');
     }
 
@@ -109,7 +109,7 @@ class PaqueteController extends Controller
 
         $paquete->update($request->validated());
 
-        return Redirect::route('paquetes.index')
+        return Redirect::route('paquete.index')
             ->with('success', 'Paquete actualizado exitosamente');
     }
 
@@ -117,7 +117,7 @@ class PaqueteController extends Controller
     {
         Paquete::find($id_paquete)->delete();
 
-        return Redirect::route('paquetes.index')
+        return Redirect::route('paquete.index')
             ->with('success', 'Paquete deleted successfully');
     }
 }
