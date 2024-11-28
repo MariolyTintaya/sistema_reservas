@@ -1,6 +1,7 @@
 @extends('layouts.panelGerente')
 
 @section('title', 'Ver Reserva')
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 @section('content')
     <section class="content container-fluid">
@@ -9,7 +10,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Create') }} Reserva</span>
+                        <span class="card-title">{{ __('Crear') }} Reserva</span>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('reservas.store') }}"  role="form" enctype="multipart/form-data">

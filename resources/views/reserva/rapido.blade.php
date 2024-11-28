@@ -19,30 +19,20 @@
         </div>
 
         <!-- Formulario Crear Reserva -->
-                 <!-- Tengo un formulario para crear la reserva y se encuentra en reserva/form-->
-        <div id="crearReservaForm" class="hidden bg-white p-6 shadow-lg rounded-lg col-span-3">
-            <h4 class="text-lg font-bold text-gray-800">Formulario de Crear Reserva</h4>
-            <!-- Enlace a la ruta del formulario para crear una nueva reserva -->
-            <a href="{{ route('reservas.create') }}" class="btn btn-primary">Ir al Formulario de Reserva</a>
-        </div>
-
-        <!-- Formulario Crear Cliente -->
-        <div id="crearClienteForm" class="hidden bg-white p-6 shadow-lg rounded-lg col-span-3">
-            <h4 class="text-lg font-bold text-gray-800">Formulario de Crear Cliente</h4>
-            <form action="{{ route('clientes.store') }}" method="POST">
-                @csrf
-                <!-- Aquí puedes poner los campos del formulario de cliente -->
-                <div class="mb-4">
-                    <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre</label>
-                    <input type="text" id="nombre" name="nombre" class="w-full p-2 border rounded">
-                </div>
-                <div class="mb-4">
-                    <label for="nroDocumento" class="block text-sm font-medium text-gray-700">Nro de Documento</label>
-                    <input type="text" id="nroDocumento" name="nroDocumento" class="w-full p-2 border rounded">
-                </div>
-                <button type="submit" class="btn btn-primary">Crear Cliente</button>
-            </form>
-        </div>
+        <script>
+             //Formulario Crear Reserva
+             document.getElementById('crearReservaBtn').addEventListener('click', () => {
+               window.location.href = "{{ route('reservas.create') }}";
+            });
+            //Formulario Crear Cliente 
+            document.getElementById('crearClienteBtn').addEventListener('click', () => {
+               window.location.href = "{{ route('clientes.create') }}";
+            });
+            //Formulario Crear Deposito 
+            document.getElementById('crearDepositoBtn').addEventListener('click', () => {
+               window.location.href = "{{ route('clientes.create') }}";
+            });
+        </script>
 
         <!-- Formulario Crear Deposito -->
         <div id="crearDepositoForm" class="hidden bg-white p-6 shadow-lg rounded-lg col-span-3">
