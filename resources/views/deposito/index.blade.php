@@ -15,8 +15,6 @@
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         max-width: 300px;
         text-align: center;
-
-        /* Colores personalizados para morado bebé */
         background-color: #e9d6f5; /* Fondo morado bebé */
         color: #5a337b; /* Texto morado oscuro */
         border: 1px solid #d8bced; /* Borde ligeramente más oscuro */
@@ -34,88 +32,119 @@
             opacity: 0;
         }
     }
+
+    .hidden {
+        display: none;
+    }
+
+    .alert-custom {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1050;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        max-width: 300px;
+        text-align: center;
+        background-color: #e9d6f5; /* Fondo morado bebé */
+        color: #5a337b; /* Texto morado oscuro */
+        border: 1px solid #d8bced; /* Borde ligeramente más oscuro */
+    }
+
+    .alert-custom button {
+        margin: 5px;
+    }
 </style>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-                                {{ __('Depositos') }}
-                            </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('depositos.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Nuevo Deposito') }}
-                                </a>
-                              </div>
-                        </div>
-                    </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-custom" id="floating-alert">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-
-                    <div class="card-body bg-white">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-                                        
-									<th >Id Deposito</th>
-									<th >Fecha</th>
-									<th >Activo</th>
-									<th >Pago Id Pago</th>
-									<th >Cliente Id Cliente</th>
-
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($depositos as $deposito)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
-										<td >{{ $deposito->id_deposito }}</td>
-										<td >{{ $deposito->fecha }}</td>
-										<td >{{ $deposito->activo }}</td>
-										<td >{{ $deposito->pago_id_pago }}</td>
-										<td >{{ $deposito->cliente_id_cliente }}</td>
-
-                                            <td>
-                                                <form action="{{ route('depositos.destroy', $deposito->id_deposito) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('depositos.show', $deposito->id_deposito) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('depositos.edit', $deposito->id_deposito) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {!! $depositos->withQueryString()->links() !!}
-            </div>
-        </div>
+    <div class="text-center mt-5">
+        <a href="{{ route('depositos.create') }}" class="btn btn-primary">Agregar Deposito</a>
     </div>
+    @if ($message = Session::get('success'))
+        <div class="alert alert-custom" id="floating-alert">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+    @if ($message = Session::get('error'))
+        <div class="alert alert-custom bg-danger text-white" id="floating-alert">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
+    <div class="row">
+        <table class="table mt-5">
+            <thead>
+                <tr>
+                    <th>No</th>
+					<th >Id Deposito</th>
+					<th >Fecha</th>
+					<th >Activo</th>
+					<th >Pago Id Pago</th>
+					<th>Cliente Id Cliente</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach ($depositos as $deposito)
+                    <tr>
+                        <td>{{ ++$i }}</td>                    
+						<td >{{ $deposito->id_deposito }}</td>
+						<td >{{ $deposito->fecha }}</td>
+						<td >{{ $deposito->activo }}</td>
+	    				<td >{{ $deposito->pago_id_pago }}</td>
+						<td >{{ $deposito->cliente_id_cliente }}</td>
+                        <td>
+                                <td><a href="{{ route('depositos.show', $deposito->id_deposito) }}" class="btn btn-success">Ver</a></td>
+                                <td><a href="{{ route('depositos.edit', $deposito->id_deposito) }}" class="btn btn-warning">Editar</a></td>
+                                <td>
+                                    <form action="{{ route('depositos.destroy', $deposito->id_deposito) }}"  method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger btn-sm" 
+                                            onclick="event.preventDefault(); showCustomAlert('¿Estás seguro de eliminar este cliente?', this.closest('form'));">
+                                            <i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}
+                                        </button>
+                                        <div id="confirmation-alert" class="alert-custom hidden">
+                                            <p id="confirmation-message"></p>
+                                            <div class="mt-2">
+                                                <button id="confirm-btn" class="btn btn-danger btn-sm">Sí, eliminar</button>
+                                                <button id="cancel-btn" class="btn btn-secondary btn-sm">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 @endsection
 <script>
-    // Hacer que la alerta desaparezca automáticamente después de 3 segundos
     document.addEventListener('DOMContentLoaded', function () {
         const alert = document.getElementById('floating-alert');
         if (alert) {
             setTimeout(() => {
                 alert.classList.add('fade-out');
                 alert.addEventListener('animationend', () => alert.remove());
-            }, 3000); // 3 segundos
+            }, 3000);
         }
     });
+
+    function showCustomAlert(message, form) {
+        const alert = document.getElementById('confirmation-alert');
+        const messageContainer = document.getElementById('confirmation-message');
+        const confirmBtn = document.getElementById('confirm-btn');
+        const cancelBtn = document.getElementById('cancel-btn');
+
+        alert.classList.remove('hidden');
+        messageContainer.textContent = message;
+
+        confirmBtn.onclick = () => {
+            form.submit();
+        };
+
+        cancelBtn.onclick = () => {
+            alert.classList.add('hidden');
+        };
+    }
 </script>
