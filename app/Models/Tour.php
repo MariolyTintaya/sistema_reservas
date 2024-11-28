@@ -16,7 +16,7 @@ class Tour extends Model
     protected $perPage = 20;
 
     // Define los atributos que pueden ser asignados masivamente
-    protected $fillable = ['id_tour', 'informe', 'fecha', 'activo', 'transporte_num_placa'];
+    protected $fillable = ['id_tour', 'informe', 'fecha', 'activo', 'transporte_num_placa', 'imagen'];
 
     // Desactivar los timestamps (created_at y updated_at)
     public $timestamps = false;
