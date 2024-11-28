@@ -15,19 +15,21 @@
                     </div>
                 </div>
                 <div class="hidden sm:flex sm:flex-col sm:items-end">
-                    <!-- Información secundaria -->
-                    <p class="text-gray-900">Fecha de reserva: {{ \Carbon\Carbon::parse($reserva->fecha_creacion)->format('Y-m-d') }}</p>
-                    
-                    <!-- Verificar si existe un transporte antes de acceder a "tipo_transporte" -->
-                    <p class="mt-1 text-xs text-gray-500">
-                        Tipo de Transporte: 
-                        @if($reserva->transporte)
-                            {{ $reserva->transporte->tipo_transporte }}
-                        @else
-                            No disponible
-                        @endif
-                    </p>
-                    <p class="mt-1 text-xs text-gray-500">Tour ID: {{ $reserva->tour_id_tour }}</p>
+                    <div class="min-w-0 flex-auto">
+                        <!-- Información secundaria -->
+                        <p class="text-gray-900">Fecha de reserva: {{ \Carbon\Carbon::parse($reserva->fecha_creacion)->format('Y-m-d') }}</p>
+                        
+                        <!-- Verificar si existe un transporte antes de acceder a "tipo_transporte" -->
+                        <p class="mt-1 text-xs text-gray-500">
+                            Tipo de Transporte: 
+                            @if($reserva->transporte)
+                                {{ $reserva->transporte->tipo_transporte }}
+                            @else
+                                No disponible
+                            @endif
+                        </p>
+                        <p class="mt-1 text-xs text-gray-500">Tour ID: {{ $reserva->tour_id_tour }}</p>
+                    </div>
                 </div>
             </li>
         @endforeach

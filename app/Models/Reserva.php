@@ -98,6 +98,7 @@ class Reserva extends Model
             ->paginate(10); // Para paginar las reservas
 
         return view('vendedores.dashboard', compact('reservas'));
+        return view('gerente.dashboard', compact('reservas'));
     }
 }
 

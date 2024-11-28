@@ -35,7 +35,6 @@
         }
     }
 </style>
-    <h1 class="text-center mt-5">VER USUARIOS</h1>
     <div class="text-center mt-5">
         <a href="{{ route('usuarios.create') }}" class="btn btn-primary">Agregar Nuevo Usuario</a>
     </div>

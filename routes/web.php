@@ -67,6 +67,7 @@ Route::resource('reservas', ReservaController::class);
 Route::post('/verificar-deposito', [DepositoController::class, 'verificarDeposito'])->name('verificar-deposito');
 Route::resource('paradas', ParadaController::class);
 Route::get('/vendedores/dashboard', [VendedorController::class, 'dashboard'])->name('vendedores.dashboard');
+Route::get('/gerente/dashboard', [VendedorController::class, 'dashboard'])->name('gerente.dashboard');
 Route::get('/reserva/rapido', [ReservaController::class, 'rapido'])->name('reservas.rapido');//Rota para la reserva rapida
 //--------------------------- FIN DE LAS RUTAS AILYN :) ----------------------------
 
