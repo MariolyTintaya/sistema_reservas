@@ -35,76 +35,52 @@
         }
     }
 </style>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-                                {{ __('Paradas') }}
-                            </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('paradas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
-                                </a>
-                              </div>
-                        </div>
-                    </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-custom" id="floating-alert">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-                    <div class="card-body bg-white">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                        <th>No</th>
-                                        
-									<th >Id Parada</th>
-									<th >Nombre</th>
-									<th >Descripcion</th>
-									<th >Activo</th>
-									<th >Ruta Id Ruta</th>
-
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($paradas as $parada)
-                                        <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
-										<td >{{ $parada->id_parada }}</td>
-										<td >{{ $parada->nombre }}</td>
-										<td >{{ $parada->descripcion }}</td>
-										<td >{{ $parada->activo }}</td>
-										<td >{{ $parada->ruta_id_ruta }}</td>
-
-                                            <td>
-                                                <form action="{{ route('paradas.destroy', $parada->id_parada) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('paradas.show', $parada->id_parada) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Show') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('paradas.edit', $parada->id_parada) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Edit') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Delete') }}</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {!! $paradas->withQueryString()->links() !!}
-            </div>
+        <div class="text-center mt-5">
+            <a href="{{ route('paradas.create') }}" class="btn btn-primary">Nueva Parada</a>
         </div>
-    </div>
+        @if ($message = Session::get('success'))
+            <div class="alert alert-custom" id="floating-alert">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        <div class="row">
+            <table class="table mt-5">
+                <thead>
+                    <tr>
+                        <th>No</th>
+						<th >Id Parada</th>
+						<th >Nombre</th>
+						<th >Descripcion</th>
+						<th >Activo</th>
+						<th >Ruta Id Ruta</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($paradas as $parada)
+                        <tr>
+                            <td>{{ ++$i }}</td>                            
+							<td >{{ $parada->id_parada }}</td>
+					    	<td >{{ $parada->nombre }}</td>
+							<td >{{ $parada->descripcion }}</td>
+							<td >{{ $parada->activo }}</td>
+							<td >{{ $parada->ruta_id_ruta }}</td>
+                            <td>
+                                <td><a href="{{ route('paradas.show', $parada->id_parada) }}" class="btn btn-success">Ver</a></td>
+                                <td><a href="{{ route('paradas.edit', $parada->id_parada) }}" class="btn btn-warning">Editar</a></td>
+                                <td>
+                                    <form action="{{ route('paradas.destroy', $parada->id_parada) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="event.preventDefault(); confirm('Estas seguro de eliminar') ? this.closest('form').submit() : false;">Eliminar</button>
+                                    </form>
+                                </td>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 @endsection
 <script>
     // Hacer que la alerta desaparezca automáticamente después de 3 segundos

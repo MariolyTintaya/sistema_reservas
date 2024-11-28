@@ -35,82 +35,58 @@
         }
     }
 </style>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <div style="display: flex; justify-content: space-between; align-items: center;">
-
-                            <span id="card_title">
-                                {{ __('Tours') }}
-                            </span>
-
-                             <div class="float-right">
-                                <a href="{{ route('tour.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Nuevo Tour') }}
-                                </a>
-                              </div>
-                        </div>
-                    </div>
-                    @if ($message = Session::get('success'))
-                        <div class="alert alert-custom" id="floating-alert">
-                            <p>{{ $message }}</p>
-                        </div>
-                    @endif
-
-                    <div class="card-body bg-white">
-                        <div class="table-responsive">
-                            <table class="table table-striped table-hover">
-                                <thead class="thead">
-                                    <tr>
-                                    <th>Imagen</th>    
-									<th >Id Tour</th>
-									<th >Informe</th>
-									<th >Fecha</th>
-									<th >Activo</th>
-									<th >Transporte Num Placa</th>
-
-                                        <th></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($tours as $tour)
-                                        <tr>
-                                           
-                                        <td>
-                                          @if ($tour->imagen) <!-- Verificar si hay una imagen -->
-                                          <img src="{{ asset('storage/' . $tour->imagen) }}" alt="Imagen del Tour" class="img-fluid">
-                                          @else
-                                             <span>No disponible</span>
-                                          @endif
-                                        </td>
-										<td >{{ $tour->id_tour }}</td>
-										<td >{{ $tour->informe }}</td>
-										<td >{{ $tour->fecha }}</td>
-										<td >{{ $tour->activo }}</td>
-										<td >{{ $tour->transporte_num_placa }}</td>
-
-                                            <td>
-                                                <form action="{{ route('tour.destroy', $tour->id_tour) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('tour.show', $tour->id_tour) }}"><i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('tour.edit', $tour->id_tour) }}"><i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}</a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm" onclick="event.preventDefault(); confirm('Are you sure to delete?') ? this.closest('form').submit() : false;"><i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}</button>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-                {!! $tours->withQueryString()->links() !!}
-            </div>
+        <div class="text-center mt-5">
+            <a href="{{ route('tour.create') }}" class="btn btn-primary">Nuevo Tour</a>
         </div>
-    </div>
+        @if ($message = Session::get('success'))
+            <div class="alert alert-custom" id="floating-alert">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        <div class="row">
+            <table class="table mt-5">
+                <thead>
+                    <tr>
+                        <th>Imagen</th>    
+						<th >Id Tour</th>
+						<th >Informe</th>
+						<th >Fecha</th>
+						<th >Activo</th>
+						<th >Transporte Num Placa</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($tours as $tour)
+                        <tr>
+                            <td>
+                                @if ($tour->imagen) <!-- Verificar si hay una imagen -->
+                                    <img src="{{ asset('storage/' . $tour->imagen) }}" alt="Imagen del Tour" class="img-fluid">
+                                @else
+                                    <span>No disponible</span>
+                                @endif
+                            </td>
+							<td >{{ $tour->id_tour }}</td>
+							<td >{{ $tour->informe }}</td>
+							<td >{{ $tour->fecha }}</td>
+							<td >{{ $tour->activo }}</td>
+							<td >{{ $tour->transporte_num_placa }}</td>
+                            <td>
+                                <td><a href="{{ route('tour.show', $tour->id_tour) }}" class="btn btn-success">Ver</a></td>
+                                <td><a href="{{ route('tour.edit', $tour->id_tour) }}" class="btn btn-warning">Editar</a></td>
+                                <td>
+                                    <form action="{{ route('tour.destroy', $tour->id_tour) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="event.preventDefault(); confirm('Estas seguro de eliminar') ? this.closest('form').submit() : false;">Eliminar</button>
+                                    </form>
+                                </td>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 @endsection
 <script>
     // Hacer que la alerta desaparezca automáticamente después de 3 segundos

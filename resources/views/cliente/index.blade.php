@@ -57,102 +57,79 @@
         margin: 5px;
     }
 </style>
-
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-sm-12">
-            <div class="card">
-                <div class="card-header">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span id="card_title">
-                            {{ __('Clientes') }}
-                        </span>
-                    </div>
-                </div>
-
-                @if ($message = Session::get('success'))
-                    <div class="alert alert-custom" id="floating-alert">
-                        <p>{{ $message }}</p>
-                    </div>
-                @endif
-
-                @if ($message = Session::get('error'))
-                    <div class="alert alert-custom bg-danger text-white" id="floating-alert">
-                        <p>{{ $message }}</p>
-                    </div>
-                @endif
-
-                <div class="card-body bg-white">
-                    <div class="table-responsive">
-                        <table class="table table-striped table-hover">
-                            <thead class="thead">
-                                <tr>
-                                    <th>No</th>
-                                    <th>Documento</th>
-                                    <th>Celular</th>
-                                    <th>Nombre</th>
-                                    <th>Ape Paterno</th>
-                                    <th>Ape Materno</th>
-                                    <th>Fecha Nac</th>
-                                    <th>Tipo Cliente</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($clientes as $cliente)
-                                    <tr>
-                                        <td>{{ ++$i }}</td>
-                                        <td>{{ $cliente->nroDocumento }}</td>
-                                        <td>{{ $cliente->celular }}</td>
-                                        <td>{{ $cliente->nombre }}</td>
-                                        <td>{{ $cliente->ape_paterno }}</td>
-                                        <td>{{ $cliente->ape_materno }}</td>
-                                        <td>{{ $cliente->fecha_nac }}</td>
-                                        <td>
-                                            @if($cliente->tipo_cliente_id_tipo == 1)
-                                                {{ __('Extranjero') }}
-                                            @elseif($cliente->tipo_cliente_id_tipo == 2)
-                                                {{ __('Nacional') }}
-                                            @else
-                                                {{ __('Desconocido') }}
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <form action="{{ route('clientes.destroy', $cliente->id_cliente) }}" method="POST">
-                                                <a class="btn btn-sm btn-primary" href="{{ route('clientes.show', $cliente->id_cliente) }}">
-                                                    <i class="fa fa-fw fa-eye"></i> {{ __('Ver') }}
-                                                </a>
-                                                <a class="btn btn-sm btn-success" href="{{ route('clientes.edit', $cliente->id_cliente) }}">
-                                                    <i class="fa fa-fw fa-edit"></i> {{ __('Editar') }}
-                                                </a>
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="button" class="btn btn-danger btn-sm" 
-                                                    onclick="event.preventDefault(); showCustomAlert('¿Estás seguro de eliminar este cliente?', this.closest('form'));"
-                                                >
-                                                    <i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}
-                                                </button>
-
-                                                <div id="confirmation-alert" class="alert-custom hidden">
-                                                    <p id="confirmation-message"></p>
-                                                    <div class="mt-2">
-                                                        <button id="confirm-btn" class="btn btn-danger btn-sm">Sí, eliminar</button>
-                                                        <button id="cancel-btn" class="btn btn-secondary btn-sm">Cancelar</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            {!! $clientes->withQueryString()->links() !!}
+        <div class="text-center mt-5">
+            <a href="{{ route('cliente.create') }}" class="btn btn-primary">Agregar Cliente</a>
         </div>
-    </div>
-</div>
+        @if ($message = Session::get('success'))
+            <div class="alert alert-custom" id="floating-alert">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        @if ($message = Session::get('error'))
+            <div class="alert alert-custom bg-danger text-white" id="floating-alert">
+                <p>{{ $message }}</p>
+            </div>
+        @endif
+        <div class="row">
+            <table class="table mt-5">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Documento</th>
+                        <th>Celular</th>
+                        <th>Nombre</th>
+                        <th>Ape Paterno</th>
+                        <th>Ape Materno</th>
+                        <th>Fecha Nac</th>
+                        <th>Tipo Cliente</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($clientes as $cliente)
+                        <tr>
+                            <td>{{ ++$i }}</td>
+                            <td>{{ $cliente->nroDocumento }}</td>
+                            <td>{{ $cliente->celular }}</td>
+                            <td>{{ $cliente->nombre }}</td>
+                            <td>{{ $cliente->ape_paterno }}</td>
+                            <td>{{ $cliente->ape_materno }}</td>
+                            <td>{{ $cliente->fecha_nac }}</td>
+                            <td>
+                                @if($cliente->tipo_cliente_id_tipo == 1)
+                                    {{ __('Extranjero') }}
+                                @elseif($cliente->tipo_cliente_id_tipo == 2)
+                                    {{ __('Nacional') }}
+                                @else
+                                    {{ __('Desconocido') }}
+                                @endif
+                            </td>
+                            <td>
+                                <td><a href="{{ route('clientes.show', $cliente->id_cliente) }}" class="btn btn-success">Ver</a></td>
+                                <td><a href="{{ route('clientes.edit', $cliente->id_cliente) }}" class="btn btn-warning">Editar</a></td>
+                                <td>
+                                    <form action="{{ route('clientes.destroy', $cliente->id_cliente) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="button" class="btn btn-danger btn-sm" 
+                                            onclick="event.preventDefault(); showCustomAlert('¿Estás seguro de eliminar este cliente?', this.closest('form'));">
+                                            <i class="fa fa-fw fa-trash"></i> {{ __('Eliminar') }}
+                                        </button>
+                                        <div id="confirmation-alert" class="alert-custom hidden">
+                                            <p id="confirmation-message"></p>
+                                            <div class="mt-2">
+                                                <button id="confirm-btn" class="btn btn-danger btn-sm">Sí, eliminar</button>
+                                                <button id="cancel-btn" class="btn btn-secondary btn-sm">Cancelar</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </td>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
 @endsection
 
 <script>
