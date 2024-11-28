@@ -54,11 +54,12 @@ class ClienteController extends Controller
      */
     public function show($id_cliente): View
     {
-        $cliente = Cliente::find($id_cliente);
+        // Cargar el cliente junto con la relación tipoCliente
+        $cliente = Cliente::with('tipoCliente')->findOrFail($id_cliente);
 
         return view('cliente.show', compact('cliente'));
     }
-
+    
     /**
      * Show the form for editing the specified resource.
      */

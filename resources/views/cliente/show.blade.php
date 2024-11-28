@@ -45,7 +45,7 @@
                         </div>
                         <div class="form-group mb-2 mb20">
                             <strong>Tipo Cliente:</strong>
-                                {{ $cliente->tipo_cliente_id_tipo}}
+                            {{ $cliente->tipoCliente->descripcion ?? 'Sin especificar' }}
                         </div>
                     </div>
                 </div>

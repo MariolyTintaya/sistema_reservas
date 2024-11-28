@@ -27,7 +27,6 @@
                         <div id="reservasMenu" class="d-none">
                             <ul class="list-unstyled ps-4">
                                 <li><a href="{{ route('reservas.create') }}" class="text-white text-decoration-none">Crear una Reserva</a></li>
-                                
                             </ul>
                         </div>
                     </li>
