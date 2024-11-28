@@ -9,7 +9,7 @@
 
                 <div class="card card-default">
                     <div class="card-header">
-                        <span class="card-title">{{ __('Update') }} Cliente</span>
+                        <span class="card-title">{{ __('Actializar') }} Cliente</span>
                     </div>
                     <div class="card-body bg-white">
                         <form method="POST" action="{{ route('clientes.update', $cliente->id_cliente) }}" role="form" enctype="multipart/form-data">

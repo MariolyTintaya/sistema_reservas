@@ -94,9 +94,21 @@ class ClienteController extends Controller
 
     public function destroy($id_cliente): RedirectResponse
     {
-        Cliente::find($id_cliente)->delete();
-
-        return Redirect::route('clientes.index')
-            ->with('success', 'Cliente eliminado exitosamente');
-    }
+        try {
+            $cliente = Cliente::findOrFail($id_cliente);
+            $cliente->delete();
+    
+            return Redirect::route('clientes.index')
+                ->with('success', 'Cliente eliminado exitosamente.');
+        } catch (\Illuminate\Database\QueryException $e) {
+            // Verificar si el error es una violación de clave foránea
+            if ($e->getCode() == 23000) {
+                return Redirect::route('clientes.index')
+                    ->with('error', 'No se puede eliminar el cliente porque tiene registros relacionados, como depósitos u otras dependencias.');
+            }
+    
+            // Si es otro tipo de error, lanzarlo nuevamente
+            throw $e;
+        }
+    }    
 }
