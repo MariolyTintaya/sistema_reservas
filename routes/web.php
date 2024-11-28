@@ -11,6 +11,7 @@ use App\Http\Controllers\ReservaController;
 use App\Http\Controllers\DestinoController;
 use App\Http\Controllers\ParadaController;
 use App\Http\Controllers\VendedorController;
+use App\Http\Controllers\ReservaReporteController;
 
 
 //------------------------ RUTAS MARIOLY  :3 --------------------------------
@@ -71,6 +72,12 @@ Route::get('/gerente/dashboard', [VendedorController::class, 'dashboard'])->name
 Route::get('/reserva/rapido', [ReservaController::class, 'rapido'])->name('reservas.rapido');//Rota para la reserva rapida
 //--------------------------- FIN DE LAS RUTAS AILYN :) ----------------------------
 
+
+
+// rutas para reportes
+
+
+Route::get('/reporte-reservas', [ReservaReporteController::class, 'generarReporte'])->name('reporte.reservas');
 
 // routes/web.php 
 //quitar esto

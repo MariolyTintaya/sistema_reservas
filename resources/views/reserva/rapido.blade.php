@@ -30,7 +30,7 @@
             });
             //Formulario Crear Deposito 
             document.getElementById('crearDepositoBtn').addEventListener('click', () => {
-               window.location.href = "{{ route('clientes.create') }}";
+               window.location.href = "{{ route('depositos.create') }}";
             });
         </script>
 

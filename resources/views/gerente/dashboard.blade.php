@@ -6,6 +6,7 @@
     @if ($reservas->isEmpty())
     <p>No hay reservas disponibles.</p>
     @else
+    
         <x-lista-reservas :reservas="$reservas" />
     @endif
 @endsection
