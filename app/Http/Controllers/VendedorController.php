@@ -40,10 +40,9 @@ class VendedorController extends Controller
 
     // Mostrar el vendedor específico
     public function show(Vendedor $vendedor)
-    {
-        return view('vendedores.index', compact('vendedor'));
-    }
-
+{
+    return view('vendedores.show', compact('vendedor'));
+}
     // Mostrar el formulario para editar un vendedor existente
     public function edit($id)
 {
@@ -53,7 +52,7 @@ class VendedorController extends Controller
 }
 
     // Actualizar un vendedor en la base de datos
-    public function update(Request $request, Vendedor $vendedor)
+    public function update(Request $request, Vendedor $vendedores)
     {
         $request->validate([
             'sueldo' => 'nullable|numeric',
@@ -69,7 +68,7 @@ class VendedorController extends Controller
     }
 
     // Eliminar un vendedor
-    public function destroy(Vendedor $vendedor)
+    public function destroy(Vendedor $vendedores)
     {
         $vendedor->delete();
         return redirect()->route('vendedores.index');

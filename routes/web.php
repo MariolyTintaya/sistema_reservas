@@ -40,7 +40,7 @@ Route::get('/gerente/dashboard', function () {
 })->name('gerente.dashboard')->middleware('auth'); // Asegúrate de que esté protegido por autenticación
 
 //Ruta AIlyn xd para ir al index de vendedor
-Route::get('/vendedores', [VendedorController::class, 'index'])->name('vendedores.index');
+Route::resource('vendedores', VendedorController::class);
 
 
 // Ruta para el dashboard del Vendedor
