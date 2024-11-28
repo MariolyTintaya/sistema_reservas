@@ -8,27 +8,40 @@
             {!! $errors->first('id_reserva', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
         </div>
            <!-- Campo Nombre del Cliente -->
-           <div class="form-group mb-2 mb20">
-            <label for="cliente_id_cliente" class="form-label">{{ __('Seleccione Cliente') }}</label>
-            <select name="cliente_id_cliente" id="cliente_id_cliente" 
-                    class="form-control @error('cliente_id_cliente') is-invalid @enderror">
-                <option value="">Seleccione un cliente</option>
-                @foreach ($clientes as $cliente)
-                    <option value="{{ $cliente->id_cliente }}" 
-                        {{ old('cliente_id_cliente') == $cliente->id_cliente ? 'selected' : '' }}>
-                        {{ $cliente->nombre }} {{ $cliente->ape_paterno }} {{ $cliente->ape_materno }}
-                    </option>
-                @endforeach
-            </select>
+<div class="form-group mb-2 mb20">
+    <!-- Mostrar mensajes de éxito o advertencia si existen en la sesión -->
+    @if(session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
-            
-            @error('cliente_id_cliente')
-                <div class="invalid-feedback">{{ $message }}</div>
-            @enderror
+    @if(session('warning'))
+        <div class="alert alert-warning">
+            {{ session('warning') }}
         </div>
-        <div class="form-group mb-2 mb20">
-            <button type="button" id="check-deposito" class="btn btn-primary">Verificar Depósito</button>
-        </div>
+    @endif
+
+    <label for="cliente_id_cliente" class="form-label">{{ __('Seleccione Cliente') }}</label>
+    <select name="cliente_id_cliente" id="cliente_id_cliente" class="form-control @error('cliente_id_cliente') is-invalid @enderror">
+        <option value="">Seleccione un cliente</option>
+        @foreach ($clientes as $cliente)
+            <option value="{{ $cliente->id_cliente }}" {{ old('cliente_id_cliente') == $cliente->id_cliente ? 'selected' : '' }}>
+                {{ $cliente->nombre }} {{ $cliente->ape_paterno }} {{ $cliente->ape_materno }}
+            </option>
+        @endforeach
+    </select>
+    @error('cliente_id_cliente')
+        <div class="invalid-feedback">{{ $message }}</div>
+    @enderror
+</div>
+
+<!-- Botón para verificar depósito -->
+<div class="form-group mb-2 mb20">
+    <button type="submit" class="btn btn-primary">Verificar Depósito</button>
+</div>
+
+   
         
         <div id="deposito-message" class="mt-2"></div>
         <!-- Campo Numero de Personas -->
@@ -88,45 +101,7 @@
 
     </div>
     <div class="col-md-12 mt20 mt-2">
-        <button type="submit" class="btn btn-primary">{{ __('Submit') }}</button>
+        <button type="submit" class="btn btn-primary">{{ __('Agregar') }}</button>
     </div>
 </div>
 
-<script>
-    //Script que maneja el boton agregar deposito y verificar 
-    document.getElementById('check-deposito').addEventListener('click', function () {
-    const clienteId = document.getElementById('cliente_id_cliente').value;
-    const messageDiv = document.getElementById('deposito-message');
-
-    if (!clienteId) {
-        messageDiv.innerHTML = '<div class="alert alert-danger">Seleccione un cliente.</div>';
-        return;
-    }
-
-    fetch(`/check-deposito`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-        },
-        body: JSON.stringify({ cliente_id_cliente: clienteId }),
-    })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data.success) {
-                messageDiv.innerHTML = `<div class="alert alert-success">${data.message}</div>`;
-            } else {
-                messageDiv.innerHTML = `
-                    <div class="alert alert-warning">
-                        ${data.message}
-                        <a href="${data.redirectUrl}" class="btn btn-sm btn-warning mt-2">Agregar Depósito</a>
-                    </div>
-                `;
-            }
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-            messageDiv.innerHTML = '<div class="alert alert-danger">Error al verificar el depósito.</div>';
-        });
-});
-</script>

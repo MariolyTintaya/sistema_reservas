@@ -63,7 +63,8 @@ Route::resource('transporte', TransporteController::class);
 Route::resource('clientes', ClienteController::class);
 Route::resource('depositos', DepositoController::class);
 Route::resource('reservas', ReservaController::class);
-Route::post('/check-deposito', [ReservaController::class, 'checkDeposito'])->name('reserva.checkDeposito');
+// routes/web.php
+Route::post('/verificar-deposito', [DepositoController::class, 'verificarDeposito'])->name('verificar-deposito');
 Route::resource('paradas', ParadaController::class);
 Route::get('/vendedores/dashboard', [VendedorController::class, 'dashboard'])->name('vendedores.dashboard');
 Route::get('/reserva/rapido', [ReservaController::class, 'rapido'])->name('reservas.rapido');//Rota para la reserva rapida

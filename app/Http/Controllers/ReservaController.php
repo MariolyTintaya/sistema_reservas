@@ -60,26 +60,23 @@ class ReservaController extends Controller
         ]);
     }
     //MI PRIMER QUERY uwu no tocar 
-    public function checkDeposito(Request $request)
-    {
-        $clienteId = $request->input('cliente_id_cliente');
+    public function verificarDeposito(Request $request)
+{
+    // Obtener el ID del cliente del formulario
+    $clienteId = $request->input('cliente_id_cliente');
 
-        // Verificar si el cliente ha hecho un depósito
-        $deposito = Deposito::where('cliente_id_cliente', $clienteId)->first();
+    // Verificar si el cliente ha hecho un depósito
+    $deposito = Deposito::where('cliente_id_cliente', $clienteId)->first();
 
-        if ($deposito) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Este cliente ya tiene un depósito registrado.',
-            ]);
-        } else {
-            return response()->json([
-                'success' => false,
-                'message' => 'Este cliente no tiene un depósito registrado.',
-                'redirectUrl' => route('depositos.create'),
-            ]);
-        }
+    if ($deposito) {
+        // Si tiene depósito, redirige o muestra un mensaje adecuado
+        return redirect()->route('algunaRuta')->with('success', 'Este cliente ya tiene un depósito registrado.');
+    } else {
+        // Si no tiene depósito, redirige a la página para agregar un depósito
+        return redirect()->route('depositos.create')->with('warning', 'Este cliente no tiene un depósito registrado.');  
     }
+}
+    
 
     /**
      * Store a newly created resource in storage.
