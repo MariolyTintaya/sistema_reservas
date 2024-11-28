@@ -29,9 +29,11 @@
         </div>
         <!-- Campo para subir la imagen -->
         <div class="form-group mb-2 mb20">
-        <label for="imagen" class="form-label">{{ __('Imagen') }}</label>
-        <input type="file" name="imagen" class="form-control @error('imagen') is-invalid @enderror" id="imagen">
-        {!! $errors->first('imagen', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+            <label for="imagen" class="form-label">{{ __('Imagen') }}</label>
+            <input type="file" name="imagen" class="form-control @error('imagen') is-invalid @enderror" id="imagen">
+            {!! $errors->first('imagen', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+            <!-- Vista previa -->
+            <img id="preview" alt="Vista previa de la imagen" />
         </div>
 
     </div>

@@ -102,8 +102,8 @@
                         <td>
                             <td><a href="{{ route('vendedores.show', $vendedor) }}" class="btn btn-success">Ver</a></td>
                             <td><a href="{{ route('vendedores.edit', $vendedor) }}" class="btn btn-warning">Editar</a></td>
-                            <td>
-                                <form action="{{ route('vendedores.destroy', $vendedor) }}" method="POST">
+                                <td>
+                                  <form action="{{ route('vendedores.destroy', $vendedor) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
                                     <button type="button" class="btn btn-danger btn-sm" 

@@ -28,7 +28,6 @@
                             <ul class="list-unstyled ps-4">
                                 <li><a href="{{ route('reporte.reservas') }}" target="_blank" class="text-white text-decoration-none">Reporte de Reservas</a></li>
                                 <li><a href="{{ route('reservas.rapido') }}" class="text-white text-decoration-none">Reserva Rapida</a></li>
-                                <li><a href="{{ route('reservas.create') }}" class="text-white text-decoration-none">Crear una Reserva</a></li>
                                 <li><a href="{{ route('depositos.index') }}" class="text-white text-decoration-none">Depositos</a></li>
                             </ul>
                         </div>
@@ -40,8 +39,8 @@
                         <div id="rutasMenu" class="d-none">
                             <ul class="list-unstyled ps-4">
                               <li><a href="{{ route('destinos.index') }}" class="text-white text-decoration-none">Destino</a></li>
-                              <li><a href="#" class="text-white text-decoration-none">Paradas</a></li>
-                              <li><a href="#" class="text-white text-decoration-none">Rutas</a></li>
+                              <li><a href="parada.index" class="text-white text-decoration-none">Paradas</a></li>
+                              <li><a href="rutas.index" class="text-white text-decoration-none">Rutas</a></li>
                             </ul>
                         </div>
                     </li>

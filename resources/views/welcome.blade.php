@@ -90,6 +90,32 @@
           <div class="relative left-[calc(50%+3rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 bg-gradient-to-tr from-[#ff80b5] to-[#9089fc] opacity-30 sm:left-[calc(50%+36rem)] sm:w-[72.1875rem]" style="clip-path: polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)"></div>
       </div> 
     </div>
+    <!-- Carrusel de Imágenes -->
+<section class="bg-gray-200 py-12">
+  <div class="container mx-auto px-4">
+    <h2 class="text-3xl font-bold text-center mb-8">Galería de Imágenes</h2>
+    <div class="relative">
+      <!-- Contenedor del carrusel -->
+      <div id="carousel" class="relative overflow-hidden">
+        <div class="flex transition-transform duration-500 ease-in-out" style="transform: translateX(0);">
+          <!-- Imágenes del carrusel -->
+           <!-- aqui le aumentan imagenes -->
+          <img src="https://via.placeholder.com/800x400" alt="Imagen 1" class="w-full flex-shrink-0">
+          <img src="https://via.placeholder.com/800x400" alt="Imagen 2" class="w-full flex-shrink-0">
+          <img src="https://via.placeholder.com/800x400" alt="Imagen 3" class="w-full flex-shrink-0">
+        </div>
+      </div>
+
+      <!-- Controles del carrusel -->
+      <button id="prev" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full hover:bg-gray-700">
+        &#8592;
+      </button>
+      <button id="next" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-gray-600 text-white p-2 rounded-full hover:bg-gray-700">
+        &#8594;
+      </button>
+    </div>
+  </div>
+</section>
 
   <!-- Sección Sobre London Travel -->
   <section id="sobre" class="container mx-auto px-4 py-12">

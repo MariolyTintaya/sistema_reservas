@@ -52,7 +52,7 @@
 					<th >Num Asientos</th>
 					<th >Tipo Transporte</th>
 					<th >Activo</th>
-                    <th></th>
+                    <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -62,15 +62,21 @@
 						<td >{{ $transportes->num_placa }}</td>
 						<td >{{ $transportes->num_asientos }}</td>
 						<td >{{ $transportes->tipo_transporte }}</td>
-						<td >{{ $transportes->activo }}</td>
-                        <td><a href="{{ route('transporte.show', urlencode($transportes->num_placa)) }}" class="btn btn-success">Ver</a></td>
-                        <td><a href="{{ route('transporte.edit', urlencode($transportes->num_placa)) }}" class="btn btn-warning">Editar</a></td>
-                        <td>
-                            <form action="{{ route('transporte.destroy', urlencode($transportes->num_placa)) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button type="submit" class="btn btn-danger" onclick="event.preventDefault(); confirm('Estas seguro de eliminar') ? this.closest('form').submit() : false;">Eliminar</button>
-                            </form>
+						<td>
+                            <span class="badge {{ $transportes->activo ? 'bg-success' : 'bg-danger' }}">
+                                {{ $transportes->activo ? 'Sí' : 'No' }}
+                            </span>
+                        </td>
+                        </td>
+                            <td><a href="{{ route('transporte.show', urlencode($transportes->num_placa)) }}" class="btn btn-success">Ver</a></td>
+                            <td><a href="{{ route('transporte.edit', urlencode($transportes->num_placa)) }}" class="btn btn-warning">Editar</a></td>
+                            <td>
+                                <form action="{{ route('transporte.destroy', urlencode($transportes->num_placa)) }}" method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button type="submit" class="btn btn-danger" onclick="event.preventDefault(); confirm('Estas seguro de eliminar') ? this.closest('form').submit() : false;">Eliminar</button>
+                                </form>
+                            </td>
                         </td>
                     </tr>
                 @endforeach

@@ -34,6 +34,13 @@
             opacity: 0;
         }
     }
+    #preview {
+        max-width: 200px; /* Máximo ancho */
+        max-height: 200px; /* Máximo alto */
+        object-fit: contain; /* Ajusta la imagen dentro del tamaño máximo */
+        border: 1px solid #ccc;
+        margin-top: 10px;
+    }
 </style>
         <div class="text-center mt-5">
             <a href="{{ route('tour.create') }}" class="btn btn-primary">Nuevo Tour</a>
@@ -99,4 +106,18 @@
             }, 3000); // 3 segundos
         }
     });
+
+    document.getElementById('imagen').addEventListener('change', function(event) {
+        const preview = document.getElementById('preview');
+        const file = event.target.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result; // Cargar imagen como fuente
+            };
+            reader.readAsDataURL(file);
+        }
+    });
 </script>
+
