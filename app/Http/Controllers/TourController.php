@@ -35,13 +35,34 @@ class TourController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(TourRequest $request): RedirectResponse
-    {
-        Tour::create($request->validated());
+    public function store(Request $request)
+{
+    $request->validate([
+        'id_tour' => 'required|unique:tour,id_tour',
+        'informe' => 'required',
+        'fecha' => 'required|date',
+        'activo' => 'required|boolean',
+        'transporte_num_placa' => 'required',
+        'imagen' => 'nullable|image|mimes:jpg,jpeg,png,gif|max:2048', // Validación de la imagen
+    ]);
 
-        return Redirect::route('tour.index')
-            ->with('success', 'Tour creado exitosamente');
+    // Subir la imagen si se proporciona
+    if ($request->hasFile('imagen')) {
+        $imagePath = $request->file('imagen')->store('tours', 'public'); // Guardar la imagen en el directorio 'tours'
     }
+
+    // Crear el nuevo tour
+    $tour = new Tour();
+    $tour->id_tour = $request->id_tour;
+    $tour->informe = $request->informe;
+    $tour->fecha = $request->fecha;
+    $tour->activo = $request->activo;
+    $tour->transporte_num_placa = $request->transporte_num_placa;
+    $tour->imagen = $imagePath ?? null; // Asignar la imagen al campo si se subió
+    $tour->save();
+
+    return redirect()->route('tour.index')->with('success', 'Tour creado exitosamente');
+}
 
     /**
      * Display the specified resource.

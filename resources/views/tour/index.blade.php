@@ -64,8 +64,7 @@
                             <table class="table table-striped table-hover">
                                 <thead class="thead">
                                     <tr>
-                                        <th>No</th>
-                                        
+                                    <th>Imagen</th>    
 									<th >Id Tour</th>
 									<th >Informe</th>
 									<th >Fecha</th>
@@ -78,8 +77,14 @@
                                 <tbody>
                                     @foreach ($tours as $tour)
                                         <tr>
-                                            <td>{{ ++$i }}</td>
-                                            
+                                           
+                                        <td>
+                                          @if ($tour->imagen) <!-- Verificar si hay una imagen -->
+                                          <img src="{{ asset('storage/' . $tour->imagen) }}" alt="Imagen del Tour" class="img-fluid">
+                                          @else
+                                             <span>No disponible</span>
+                                          @endif
+                                        </td>
 										<td >{{ $tour->id_tour }}</td>
 										<td >{{ $tour->informe }}</td>
 										<td >{{ $tour->fecha }}</td>
