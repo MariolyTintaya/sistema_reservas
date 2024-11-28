@@ -36,18 +36,16 @@
         }
     }
 </style>
-        <h1 class="text-center mt-5">Lista de Counters</h1>
         <div class="text-center mt-5">
-            <a href="{{ route('vendedores.create') }}" class="btn btn-primary">Agregar Datos</a>
+            <a href="{{ route('vendedores.create') }}" class="btn btn-primary">Agregar Vendedor</a>
         </div>
         @if ($message = Session::get('success'))
-                        <div class="alert alert-custom" id="floating-alert">
-                            <p>{{ $message }}</p>
-                        </div>
+            <div class="alert alert-custom" id="floating-alert">
+                <p>{{ $message }}</p>
+            </div>
         @endif
         <div class="row">
-        
-            <table class="table table-bordered">
+            <table class="table mt-5">
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -71,19 +69,21 @@
                             <td>{{ $vendedor->celular }}</td>
                             <td>{{ $vendedor->activo ? 'Sí' : 'No' }}</td>
                             <td>
-                                <a href="{{ route('vendedores.edit', $vendedor) }}" class="btn btn-warning btn-sm">Editar</a>
-                                <form action="{{ route('vendedores.destroy', $vendedor) }}" method="POST" style="display:inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('¿Está seguro?')">Eliminar</button>
-                                </form>
+                                <td><a href="{{ route('vendedores.show', $vendedor)) }}" class="btn btn-success">Ver</a></td>
+                                <td><a href="{{ route('vendedores.edit', $vendedor)) }}" class="btn btn-warning">Editar</a></td>
+                                <td>
+                                    <form action="{{ route('vendedores.destroy', $vendedor) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger" onclick="event.preventDefault(); confirm('Estas seguro de eliminar') ? this.closest('form').submit() : false;">Eliminar</button>
+                                    </form>
+                                </td>
                             </td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
-
-    </div>
+        </div>
 @endsection
 <script>
     // Hacer que la alerta desaparezca automáticamente después de 3 segundos
