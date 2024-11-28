@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1 class="text-center mt-5">Datos del Vendedor</h1>
+    <h1 class="text-center mt-5">Datos del Vendedor usu</h1>
     
     <form action="{{ route('vendedores.store') }}" method="POST" class="form-group">
      @csrf
