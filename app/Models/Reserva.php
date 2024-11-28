@@ -43,14 +43,16 @@ class Reserva extends Model
      */
     protected $fillable = [
         'id_reserva',
+        'cliente_id_cliente',
         'num_personas',
         'fecha_creacion',
-        'activo',
         'tour_id_tour',
-        'cliente_id_cliente',
+        'transporte_id',
         'deposito_id_deposito',
-        'usuario_id_usuario'
+        'usuario_id_usuario',
+        'activo',
     ];
+    
     
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

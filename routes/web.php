@@ -64,6 +64,7 @@ Route::resource('transporte', TransporteController::class);
 Route::resource('clientes', ClienteController::class);
 Route::resource('depositos', DepositoController::class);
 Route::resource('reservas', ReservaController::class);
+Route::post('/reservas', [ReservaController::class, 'store'])->name('reservas.store');
 // routes/web.php
 Route::post('/verificar-deposito', [DepositoController::class, 'verificarDeposito'])->name('verificar-deposito');
 Route::resource('paradas', ParadaController::class);

@@ -4,14 +4,11 @@
 
 @section('content')
     <!-- Contenido principal -->
-    <h3 class="text-xl font-bold text-gray-700 mb-4">Reserva Rápida</h3>
+    <h1 class="mb-4">Reserva Rapida</h1>
 
     <div class="grid grid-cols-1 gap-6 md:grid-cols-3">
         <!-- Botones de acciones -->
         <div class="bg-white p-6 shadow-lg rounded-lg">
-            <h4 class="text-lg font-bold text-gray-800">Acciones</h4>
-            <p class="text-sm text-gray-600 mb-4">Elige una opción para proceder.</p>
-
             <!-- Botones para mostrar los formularios -->
             <button id="crearReservaBtn" class="btn btn-primary mb-4 w-full">Crear Reserva</button>
             <button id="crearClienteBtn" class="btn btn-primary mb-4 w-full">Crear Cliente</button>
