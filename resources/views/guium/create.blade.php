@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crear Guia</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" />
-</head>
+@extends('layouts.panelGerente')
 
+@section('title', 'VerCientes')
+
+@section('content')
+<h1 class="mb-4">Crear Guia</h1>
 <body class="bg-gray-100 flex flex-col">
     <section class="content container-fluid">
         <div class="row">
@@ -30,5 +26,4 @@
             </div>
         </div>
     </section>
-</body>
-</html>
+@endsection
