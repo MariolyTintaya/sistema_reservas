@@ -3,8 +3,6 @@
 @section('title', 'CrearCliente')
 
 @section('content')
-    <h1 class="mb-4">Bienvenido Gerente</h1>
-    <p>Aquí puedes ver la lista de Clientes.</p>
     <!--INICIO DE LA LISTA DE CLIENTES --->
     <div class="container-fluid">
         <div class="row">

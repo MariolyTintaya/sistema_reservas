@@ -26,6 +26,7 @@
                         </button>
                         <div id="reservasMenu" class="d-none">
                             <ul class="list-unstyled ps-4">
+                                <li><a href="{{ route('reservas.rapido') }}" class="text-white text-decoration-none">Reserva Rapida</a></li>
                                 <li><a href="{{ route('reservas.create') }}" class="text-white text-decoration-none">Crear una Reserva</a></li>
                                 <li><a href="{{ route('depositos.index') }}" class="text-white text-decoration-none">Depositos</a></li>
                             </ul>

@@ -169,4 +169,8 @@ class ReservaController extends Controller
         return Redirect::route('reservas.index')
             ->with('success', 'Reserva Eliminada exkitosamente');
     }
+    public function rapido()//Creacion de la reserva rapidas
+    {
+        return view('reserva.rapido');
+    }
 }

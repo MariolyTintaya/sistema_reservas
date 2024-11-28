@@ -39,10 +39,15 @@ Route::get('/gerente/dashboard', function () {
     return view('gerente.dashboard'); // Redirige a la vista gerente/dashboard.blade.php
 })->name('gerente.dashboard')->middleware('auth'); // Asegúrate de que esté protegido por autenticación
 
+//Ruta AIlyn xd para ir al index de vendedor
+Route::get('/vendedores', [VendedorController::class, 'index'])->name('vendedores.index');
+
+
 // Ruta para el dashboard del Vendedor
 Route::get('/vendedores/dashboard', function () {
     return view('vendedores.dashboard'); // Redirige a la vista vendedor/dashboard.blade.php
 })->name('vendedor.dashboard')->middleware('auth'); // Asegúrate de que esté protegido por autenticación
+
 
 //--------------------------- FIN DE LAS RUTAS MARIOLY----------------------------
 
@@ -61,7 +66,7 @@ Route::resource('reservas', ReservaController::class);
 Route::post('/check-deposito', [ReservaController::class, 'checkDeposito'])->name('reserva.checkDeposito');
 Route::resource('paradas', ParadaController::class);
 Route::get('/vendedores/dashboard', [VendedorController::class, 'dashboard'])->name('vendedores.dashboard');
-
+Route::get('/reserva/rapido', [ReservaController::class, 'rapido'])->name('reservas.rapido');//Rota para la reserva rapida
 //--------------------------- FIN DE LAS RUTAS AILYN :) ----------------------------
 
 
