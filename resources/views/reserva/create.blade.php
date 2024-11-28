@@ -20,6 +20,7 @@
                             @include('reserva.form')
 
                         </form>
+                        
                     </div>
                 </div>
             </div>

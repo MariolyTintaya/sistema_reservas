@@ -149,15 +149,19 @@
         const confirmBtn = document.getElementById('confirm-btn');
         const cancelBtn = document.getElementById('cancel-btn');
 
+        // Muestra la alerta personalizada
         alert.classList.remove('hidden');
         messageContainer.textContent = message;
 
+        // Acción al confirmar
         confirmBtn.onclick = () => {
-            form.submit();
+            form.submit(); // Envía el formulario solo al confirmar
         };
 
+        // Acción al cancelar
         cancelBtn.onclick = () => {
-            alert.classList.add('hidden');
+            alert.classList.add('hidden'); // Oculta la alerta
         };
     }
+
 </script>

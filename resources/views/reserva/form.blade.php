@@ -36,11 +36,11 @@
     @enderror
 </div>
 
-<!-- Botón para verificar depósito -->
+<!-- Botón para verificar depósito
 <div class="form-group mb-2 mb20">
     <button type="submit" class="btn btn-primary">Verificar Depósito</button>
 </div>
-
+-->
    
         
         <div id="deposito-message" class="mt-2"></div>
@@ -68,21 +68,23 @@
                    readonly>
             {!! $errors->first('fecha_creacion', '<div class=lert"><"invalid-feedback" role="astrong>:message</strong></div>') !!}
         </div>
-          <!-- Campo Oculto Activo (Se llenara 1 por defecto) -->
+            <!-- Campo Oculto Activo (Se llenara 1 por defecto) -->
         <input type="hidden" name="activo" value="1">
 
-       <!-- Campo Tour -->
-       <div class="form-group mb-2 mb20">
-        <label for="tour_id_tour" class="form-label">{{ __('Tour') }}</label>
-        <select name="tour_id_tour" class="form-control @error('tour_id_tour') is-invalid @enderror" id="tour_id_tour">
-            @foreach ($tours as $tour)
-                <option value="{{ $tour->id_tour }}" {{ old('tour_id_tour') == $tour->id_tour ? 'selected' : '' }}>
-                    {{ $tour->id_tour }}
-                </option>
-            @endforeach
-        </select>
-        {!! $errors->first('tour_id_tour', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
-    </div>
+        <!-- Campo Tour -->
+        <div class="form-group mb-2 mb20">
+            <label for="tour_id_tour" class="form-label">{{ __('Tour') }}</label>
+            <select name="tour_id_tour" class="form-control @error('tour_id_tour') is-invalid @enderror" id="tour_id_tour">
+                <option value="">Seleccione un tour</option>
+                @foreach ($tours as $tour)
+                    <option value="{{ $tour->id_tour }}" {{ old('tour_id_tour') == $tour->id_tour ? 'selected' : '' }}>
+                        {{ $tour->informe }} <!-- O la columna que desees mostrar -->
+                    </option>
+                @endforeach
+            </select>
+            {!! $errors->first('tour_id_tour', '<div class="invalid-feedback" role="alert"><strong>:message</strong></div>') !!}
+        </div>
+
         <!-- Campo Deposito se guardara automaticamente el id -->
               
         <!-- Campo Vendedor -->
@@ -105,3 +107,12 @@
     </div>
 </div>
 
+@if($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif

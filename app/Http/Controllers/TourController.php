@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tour;
+use App\Models\Reserva;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\TourRequest;
@@ -25,11 +26,13 @@ class TourController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
     {
-        $tour = new Tour();
+        $tours = Tour::where('activo', 1)->get(); // Obtener solo tours activos
+        $clientes = Cliente::all(); // Si usas clientes
+        $ultimoId = Reserva::max('id_reserva'); // Si necesitas calcular el siguiente ID
 
-        return view('tour.create', compact('tour'));
+        return view('reservas.create', compact('tours', 'clientes', 'ultimoId'));
     }
 
     /**
