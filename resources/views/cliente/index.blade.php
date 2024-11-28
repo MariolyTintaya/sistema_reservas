@@ -58,7 +58,7 @@
     }
 </style>
         <div class="text-center mt-5">
-            <a href="{{ route('cliente.create') }}" class="btn btn-primary">Agregar Cliente</a>
+            <a href="{{ route('clientes.create') }}" class="btn btn-primary">Agregar Cliente</a>
         </div>
         @if ($message = Session::get('success'))
             <div class="alert alert-custom" id="floating-alert">
